@@ -1,6 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+@font-face {
+  font-family: brand;
+  src: url("/src/assets/fonts/Vonique64.ttf");
+}
+:root {
+  --accent: #ef0a6a;
+}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,7 +16,7 @@
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Varela Round", sans-serif;
 }
 
 .container {
@@ -19,6 +27,13 @@ body {
   border: 1px solid steelblue;
   padding: 30px;
   border-radius: 5px;
+}
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 .btn {
   display: inline-block;
@@ -79,4 +94,32 @@ body {
 .center {
   margin: 0;
   align-self: center;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Varela Round", sans-serif;
+}
+
+.img-small {
+  width: 35%;
+  margin: 10px;
+}
+
+.font-primary {
+  font-family: "Varela Round", sans-serif;
+}
+.font-large {
+  font-size: 1.2rem;
+}
+.font-align-left {
+  text-align: left;
+}
+.link-primary {
+  color: blue;
+  cursor: pointer;
 }

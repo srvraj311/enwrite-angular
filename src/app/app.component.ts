@@ -7,8 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'enWrite-angular';
-  loggedIn: boolean = this.isUserLoggedIn();
-  isUserLoggedIn(): boolean {
-    return true;
-  }
 }

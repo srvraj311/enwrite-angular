@@ -1,0 +1,59 @@
+<div class="login-feilds-container"></div>
+
+<div class="center-container">
+  <form class="login-form">
+    <img
+      class="img-small login-img"
+      alt="enWrite-icon"
+      src="/assets/icons/png/main.png"
+    />
+    <p class="font-primary font-large">Welcome to EnWrite</p>
+    <div><p class="font-primary font-align-left">Login to Continue</p></div>
+
+    <mat-form-field color="accent" class="login-input" appearance="fill">
+      <mat-label>Enter your email</mat-label>
+      <input
+        matInput
+        placeholder="pat@example.com"
+        [formControl]="email"
+        required
+      />
+      <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+    <mat-form-field color="accent" class="login-input" appearance="fill">
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div>
+      <mat-checkbox class="font-primary" [formControl]="remeberDevice"
+        >Remember Device ?</mat-checkbox
+      >
+      <a [ngStyle]="{ 'margin-left': '30px' }" class="font-primary link-primary"
+        ><u>Forgot Password ?</u>
+      </a>
+    </div>
+    <div class="btn-login">
+      <button mat-raised-button class="btn btn-block" color="accent">
+        Log-In
+      </button>
+      <button
+        mat-raised-button
+        [ngStyle]="{ 'margin-left': '10px' }"
+        class="btn btn-block"
+        color="basic"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
