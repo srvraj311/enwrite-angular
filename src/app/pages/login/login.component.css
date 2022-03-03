@@ -39,4 +39,5 @@
   justify-content: space-evenly;
   display: flex;
   flex-direction: row;
+  margin-bottom: 22px;
 }

@@ -1,7 +1,7 @@
 <div class="login-feilds-container"></div>
 
 <div class="center-container">
-  <form class="login-form">
+  <form #f="ngForm" (ngSubmit)="login(f)" class="login-form">
     <img
       class="img-small login-img"
       alt="enWrite-icon"
@@ -10,7 +10,7 @@
     <p class="font-primary font-large">Welcome to EnWrite</p>
     <div><p class="font-primary font-align-left">Login to Continue</p></div>
 
-    <mat-form-field color="accent" class="login-input" appearance="fill">
+    <mat-form-field color="accent" class="login-input" appearance="outline">
       <mat-label>Enter your email</mat-label>
       <input
         matInput
@@ -18,11 +18,19 @@
         [formControl]="email"
         required
       />
-      <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+      <mat-error *ngIf="email.invalid">{{ getErrorMessage(email) }}</mat-error>
     </mat-form-field>
-    <mat-form-field color="accent" class="login-input" appearance="fill">
+    <mat-form-field color="accent" class="login-input" appearance="outline">
       <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" />
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        [formControl]="password"
+        required
+      />
+      <mat-error *ngIf="password.invalid">{{
+        getErrorMessage(password)
+      }}</mat-error>
       <button
         mat-icon-button
         matSuffix
@@ -43,16 +51,16 @@
       </a>
     </div>
     <div class="btn-login">
-      <button mat-raised-button class="btn btn-block" color="accent">
-        Log-In
-      </button>
       <button
         mat-raised-button
-        [ngStyle]="{ 'margin-left': '10px' }"
+        [ngStyle]="{ 'margin-right': '10px' }"
         class="btn btn-block"
         color="basic"
       >
         Cancel
+      </button>
+      <button mat-raised-button class="btn btn-block" color="accent">
+        Log-In
       </button>
     </div>
   </form>

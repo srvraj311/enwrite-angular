@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,9 +18,9 @@ export class SplashScreenComponent implements OnInit {
   isUserLoggedIn(): void {
     var loggedIn = false;
     if (loggedIn) {
-      this.router.navigateByUrl('/login');
-    } else {
       this.router.navigateByUrl('/home');
+    } else {
+      this.router.navigateByUrl('/login');
     }
   }
 }
