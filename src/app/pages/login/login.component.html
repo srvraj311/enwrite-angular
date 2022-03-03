@@ -10,7 +10,11 @@
     <p class="font-primary font-large">Welcome to EnWrite</p>
     <div><p class="font-primary font-align-left">Login to Continue</p></div>
 
-    <mat-form-field color="accent" class="login-input" appearance="outline">
+    <mat-form-field
+      color="accent-secondary"
+      class="login-input"
+      appearance="outline"
+    >
       <mat-label>Enter your email</mat-label>
       <input
         matInput
@@ -20,7 +24,11 @@
       />
       <mat-error *ngIf="email.invalid">{{ getErrorMessage(email) }}</mat-error>
     </mat-form-field>
-    <mat-form-field color="accent" class="login-input" appearance="outline">
+    <mat-form-field
+      color="accent-secondary"
+      class="login-input"
+      appearance="outline"
+    >
       <mat-label>Enter your password</mat-label>
       <input
         matInput

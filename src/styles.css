@@ -8,6 +8,7 @@
 }
 :root {
   --accent: #ef0a6a;
+  --accent-secondary: #b6359c;
 }
 * {
   box-sizing: border-box;

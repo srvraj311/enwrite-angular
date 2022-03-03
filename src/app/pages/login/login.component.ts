@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ import {
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  constructor() {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {}
 
@@ -22,7 +23,6 @@ export class LoginComponent implements OnInit {
   password = new FormControl('', [Validators.required]);
   remeberDevice: FormControl = new FormControl(false);
   getErrorMessage(f: FormControl) {
-    console.log(f.status);
     if (f.hasError('required')) {
       return 'You must enter a value';
     }
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       remeberDevice: this.remeberDevice.value,
     };
     if (loginReq.email != null && loginReq.password != null) {
-      console.log(loginReq);
+      this.userService.loginUser(loginReq);
     } else {
       if (loginReq.password == null) {
         this.password.hasError('password') ? 'Not a valid password' : '';
