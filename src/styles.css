@@ -84,3 +84,6 @@ body {
   color: blue;
   cursor: pointer;
 }
+.card-shadow {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08), 0 3px 8px rgba(0, 0, 0, 0.01);
+}

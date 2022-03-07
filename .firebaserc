@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "enwrite-8ffba": {
+      "hosting": {
+        "enWrite-angular": [
+          "enwrite-8ffba"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "enwrite-8ffba"
+  }
+}

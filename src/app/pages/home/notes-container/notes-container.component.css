@@ -1,7 +1,7 @@
 .searchBar {
   width: 80vw;
   height: 40px;
-  padding-left: 12px;
+  padding: 20px !important;
   border: none;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.11), 0 3px 8px rgba(0, 0, 0, 0.13);
@@ -11,6 +11,11 @@
   height: 40px;
   background-color: #ef0a60;
   color: white;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.11), 0 3px 8px rgba(0, 0, 0, 0.13);
+}
+
+.searchBar:focus {
+  outline: none;
+  border: none;
 }

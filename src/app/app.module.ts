@@ -27,6 +27,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NotesContainerComponent } from './pages/home/notes-container/notes-container.component';
 import { NoteComponent } from './pages/home/note/note.component';
 
+// Firebase
+
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+
 const routes: Routes = [
   { path: '', component: SplashScreenComponent },
   { path: 'home', component: HomeComponent },
@@ -66,6 +73,9 @@ const routes: Routes = [
     MatRadioModule,
     MatButtonModule,
     MatCheckboxModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ],
   exports: [
     CommonModule,

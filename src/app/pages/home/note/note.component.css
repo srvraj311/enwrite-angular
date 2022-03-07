@@ -1,0 +1,15 @@
+.noteTitle {
+  font-size: 1.1rem;
+}
+.noteBody {
+  font-size: 0.8rem;
+}
+.noteDate {
+  font-size: 0.7rem;
+  text-align: end;
+}
+
+.note {
+  border-radius: 15px !important;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08), 0 3px 8px rgba(0, 0, 0, 0.01);
+}
