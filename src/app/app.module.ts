@@ -10,6 +10,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { HeaderComponent } from './pages/home/header/header.component';
 // Material Forms
 import { CommonModule } from '@angular/common';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -23,6 +24,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NotesContainerComponent } from './pages/home/notes-container/notes-container.component';
+import { NoteComponent } from './pages/home/note/note.component';
 
 const routes: Routes = [
   { path: '', component: SplashScreenComponent },
@@ -38,6 +41,9 @@ const routes: Routes = [
     HomeComponent,
     LoginComponent,
     SignupComponent,
+    HeaderComponent,
+    NotesContainerComponent,
+    NoteComponent,
   ],
   imports: [
     BrowserModule,
