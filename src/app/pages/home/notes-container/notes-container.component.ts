@@ -12,11 +12,22 @@ import { NotesService } from 'src/app/services/notes.service';
 })
 export class NotesContainerComponent implements OnInit {
   notesArr!: Note[];
+  arr!: number[];
   constructor(private noteService: NotesService, private db: Firestore) {}
 
   ngOnInit(): void {
-    this.noteService.getNotes().subscribe((data) => {
-      this.notesArr = data as Note[];
-    });
+    if (localStorage.getItem('notes') !== null) {
+      //localStorage.removeItem('notes');
+
+      var obj = localStorage.getItem('notes');
+      console.log(obj);
+      this.notesArr = JSON.parse(obj!.toString());
+    } else {
+      this.noteService.getNotes().subscribe((data) => {
+        this.notesArr = data as Note[];
+        this.arr = new Array(this.notesArr.length);
+        localStorage.setItem('notes', JSON.stringify(this.notesArr));
+      });
+    }
   }
 }

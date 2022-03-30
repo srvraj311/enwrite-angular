@@ -8,8 +8,8 @@
   font-size: 0.7rem;
   text-align: end;
 }
-
 .note {
+  max-width: calc((100vw / 3) - 2rem);
   border-radius: 15px !important;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08), 0 3px 8px rgba(0, 0, 0, 0.01);
 }

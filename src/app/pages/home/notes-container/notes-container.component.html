@@ -13,10 +13,8 @@
       >search</mat-icon
     >
   </div>
-
-  <div class="notes-container container">
-    <div *ngFor="let x of notesArr">
-      <app-note [note]="x"></app-note>
-    </div>
-  </div>
+</div>
+<div class="notes-container">
+  <!-- <div class="column" *ngFor="let i of arr">Col</div> -->
+  <app-note class="note" *ngFor="let x of notesArr" [note]="x"></app-note>
 </div>
