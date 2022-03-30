@@ -1,5 +1,3 @@
-import { LoginComponent } from '../pages/login/login.component';
-
 export default interface Note {
   note_id?: string;
   note_title: string;
@@ -11,17 +9,17 @@ export default interface Note {
 
 export default class Note implements Note {
   constructor(
-    id: string,
-    title: string,
-    body: string,
-    date: number,
-    colour: string,
+    note_id: string,
+    note_title: string,
+    note_body: string,
+    note_date: number,
+    note_colour: string,
     pinned: boolean
   ) {
-    this.note_title = title;
-    this.note_body = body;
-    this.note_date = date;
-    this.note_colour = colour;
+    this.note_title = note_title;
+    this.note_body = note_body;
+    this.note_date = note_date;
+    this.note_colour = note_colour;
     this.pinned = pinned;
   }
 

@@ -1,7 +1,10 @@
-<div class="container note border rounded my-3 py-2">
-  <div class="noteTitle">{{ "Note Title" }}</div>
+<div
+  class="container note border rounded my-3 py-3"
+  [ngStyle]="{ background: note.note_colour }"
+>
+  <div class="noteTitle">{{ note.note_title }}</div>
   <div class="noteBody">
-    {{ "Note Body" }}
+    {{ note.note_body }}
   </div>
-  <div class="noteDate">22 Days Ago</div>
+  <div class="noteDate">{{ time }}</div>
 </div>

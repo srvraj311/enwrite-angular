@@ -27,8 +27,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NotesContainerComponent } from './pages/home/notes-container/notes-container.component';
 import { NoteComponent } from './pages/home/note/note.component';
 
-// Firebase
-
+// Firebase auth/firestore/app
+import { AngularFireModule } from '@angular/fire/compat';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
@@ -60,7 +60,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatFormFieldModule,
     MatNativeDateModule,
-    RouterModule.forRoot(routes, { enableTracing: true }),
+    RouterModule.forRoot(routes, { enableTracing: false }),
     CommonModule,
     MatTableModule,
     MatSortModule,
@@ -76,6 +76,7 @@ const routes: Routes = [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    AngularFireModule.initializeApp(environment.firebase),
   ],
   exports: [
     CommonModule,

@@ -11,11 +11,12 @@ import { NotesService } from 'src/app/services/notes.service';
   styleUrls: ['./notes-container.component.css'],
 })
 export class NotesContainerComponent implements OnInit {
-  notesArr!:Note[];
-  constructor(private noteService: NotesService, private db:Firestore) {
-    noteService.getNotes();
-    this.notesArr = 
+  notesArr!: Note[];
+  constructor(private noteService: NotesService, private db: Firestore) {}
+
+  ngOnInit(): void {
+    this.noteService.getNotes().subscribe((data) => {
+      this.notesArr = data as Note[];
+    });
   }
-  arr: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  ngOnInit(): void {}
 }

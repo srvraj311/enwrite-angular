@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import Note from 'src/app/models/Note';
+import { NotesService } from 'src/app/services/notes.service';
 
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
-  styleUrls: ['./note.component.css']
+  styleUrls: ['./note.component.css'],
 })
 export class NoteComponent implements OnInit {
-
-  constructor() { }
-
+  @Input() note!: Note;
+  time: string = '';
+  constructor(private noteService: NotesService) {}
   ngOnInit(): void {
+    this.time = this.noteService
+      .convertTimestampToMinutesAgo(Number(this.note.note_date))
+      .toString();
   }
-
 }

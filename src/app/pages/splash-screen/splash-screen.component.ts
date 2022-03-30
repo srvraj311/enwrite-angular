@@ -17,7 +17,7 @@ export class SplashScreenComponent implements OnInit {
 
   isUserLoggedIn(): void {
     var loggedIn = false;
-    if (loggedIn) {
+    if (localStorage.getItem('user') !== null) {
       this.router.navigateByUrl('/home');
     } else {
       this.router.navigateByUrl('/login');

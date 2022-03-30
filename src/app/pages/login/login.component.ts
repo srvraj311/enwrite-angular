@@ -6,7 +6,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import LoginReq from '../../models/LoginReq';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +18,17 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {
+    if (this.userService.isUserLoggedIn()) {
+      this.router.navigate(['/home']);
+    }
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.userService.isUserLoggedIn()) {
+      this.router.navigate(['/home']);
+    }
+  }
 
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
@@ -36,11 +47,12 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: NgForm): void {
-    var loginReq = {
+    var loginReq: LoginReq = {
       email: this.email.status === 'VALID' ? this.email.value : null,
       password: this.password.status === 'VALID' ? this.password.value : null,
       remeberDevice: this.remeberDevice.value,
     };
+
     if (loginReq.email != null && loginReq.password != null) {
       this.userService.loginUser(loginReq);
     } else {
