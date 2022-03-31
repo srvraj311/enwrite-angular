@@ -9,7 +9,14 @@
   text-align: end;
 }
 .note {
-  max-width: calc((100vw / 3) - 2rem);
+  margin: 1rem 0px;
+  padding: 1rem;
   border-radius: 15px !important;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08), 0 3px 8px rgba(0, 0, 0, 0.01);
+}
+.note:first-child {
+  margin-top: 0;
+}
+.note:hover {
+  cursor: pointer;
 }

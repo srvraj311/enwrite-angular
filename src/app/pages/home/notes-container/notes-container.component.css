@@ -15,35 +15,42 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.11), 0 3px 8px rgba(0, 0, 0, 0.13);
 }
 
+/* Search bar at Top */
+.search {
+  height: 8vh;
+  padding: 1rem 0;
+}
 .searchBar:focus {
   outline: none;
   border: none;
 }
+/* Main Div for notes display and view */
+.note-parent {
+  display: flex;
+  width: 100%;
+  height: 92vh;
+  position: relative;
+  bottom: 0;
+}
 
+.note-view {
+  height: 100%;
+  width: 100%;
+  flex: 1 1 auto;
+}
 .notes-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(calc(100vw / 5), 1fr));
-  grid-auto-rows: auto;
-  transition: all 1s ease-in-out;
-  padding: 10px;
-  column-gap: 10px;
-  width: 100% !important;
-  background-color: lightgray;
-  overflow-x: hidden;
+  max-width: calc((100vw / 3) - 2rem);
+  flex: 0 0 auto;
+  min-width: 270px;
+  overflow-y: scroll;
+  transition: all 0.5s ease-out;
+  transition-delay: 0s;
+  padding: 0px 0.5rem;
+  margin-top: 1.5rem;
 }
-/* .note {
-  width: calc((100vw / 4) - 2rem);
-} */
-
-@media screen and (max-width: 1080px) {
-  .notes-container {
-    grid-template-columns: repeat(auto-fit, minmax(calc(100vw / 4), 1fr));
-  }
+.notes-container:first-child {
+  padding-top: 0px;
 }
 
-@media screen and (max-width: 768) {
-  .notes-container {
-    display: none;
-    grid-template-columns: repeat(auto-fit, minmax(calc(100vw / 3), 1fr));
-  }
+@media screen and (max-width: 680px) {
 }

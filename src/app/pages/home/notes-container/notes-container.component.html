@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="search-container my-2 mx-2 d-flex bd-highlight">
+<div class="search container">
+  <div class="search-container d-flex bd-highlight">
     <input
       name="search"
       type="text"
@@ -14,7 +14,18 @@
     >
   </div>
 </div>
-<div class="notes-container">
-  <!-- <div class="column" *ngFor="let i of arr">Col</div> -->
-  <app-note class="note" *ngFor="let x of notesArr" [note]="x"></app-note>
+<div class="note-parent">
+  <div class="notes-container">
+    <!-- <div class="column" *ngFor="let i of arr">Col</div> -->
+    <app-note
+      class="note"
+      *ngFor="let x of notesArr; let i = index"
+      [note]="x"
+      (click)="selectNote(i)"
+    ></app-note>
+  </div>
+  <app-note-view
+    class="note-view"
+    [selectedNote]="selectedNote"
+  ></app-note-view>
 </div>

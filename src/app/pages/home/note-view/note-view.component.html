@@ -1,0 +1,30 @@
+<div
+  *ngIf="selectedNote != undefined; else showEmptyMessage"
+  class="note-editor"
+  [ngStyle]="{ background: selectedNote.note_colour }"
+>
+  <input
+    type="text"
+    name="title"
+    id="title"
+    [value]="selectedNote.note_title"
+    [ngStyle]="{ background: selectedNote.note_colour }"
+  />
+  <textarea
+    [ngStyle]="{ background: selectedNote.note_colour }"
+    [value]="selectedNote.note_body"
+    name="body"
+    id="body"
+  ></textarea>
+  <div class="note-view-bottom-options">
+    <div class="last_opened">21 hours ago</div>
+    <div>
+      <button class="btn btn-primary save">Save</button>
+      <button class="btn btn-primary">Clear</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #showEmptyMessage>
+  {{ NO_NOTES_SELECTED }}
+</ng-template>

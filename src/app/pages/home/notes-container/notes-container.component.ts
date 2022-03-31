@@ -13,6 +13,7 @@ import { NotesService } from 'src/app/services/notes.service';
 export class NotesContainerComponent implements OnInit {
   notesArr!: Note[];
   arr!: number[];
+  selectedNote!: Note;
   constructor(private noteService: NotesService, private db: Firestore) {}
 
   ngOnInit(): void {
@@ -20,7 +21,6 @@ export class NotesContainerComponent implements OnInit {
       //localStorage.removeItem('notes');
 
       var obj = localStorage.getItem('notes');
-      console.log(obj);
       this.notesArr = JSON.parse(obj!.toString());
     } else {
       this.noteService.getNotes().subscribe((data) => {
@@ -29,5 +29,9 @@ export class NotesContainerComponent implements OnInit {
         localStorage.setItem('notes', JSON.stringify(this.notesArr));
       });
     }
+  }
+
+  selectNote(i: number): void {
+    this.selectedNote = this.notesArr[i];
   }
 }

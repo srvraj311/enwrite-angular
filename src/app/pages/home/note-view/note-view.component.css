@@ -1,0 +1,48 @@
+.note-editor {
+  display: flex;
+  margin: 20px;
+  padding: 10px;
+  flex-direction: column;
+  border: 1px solid #e8e8e8;
+  border-radius: 20px;
+  height: 90%;
+}
+#title {
+  margin-top: 20px;
+  height: 40px;
+  padding: 20px;
+  border: 1px solid #969696;
+  border: none;
+  font-size: 1.3rem;
+  border-radius: 10px;
+  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.11), 0 3px 8px rgba(0, 0, 0, 0.13); */
+}
+#body {
+  margin-top: 20px;
+  /* height: calc(100vh - 30vh); */
+  height: 60vh;
+  padding: 10px 20px !important;
+  border: none;
+  border-radius: 10px;
+  resize: none;
+  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.11), 0 3px 8px rgba(0, 0, 0, 0.13); */
+}
+#body:focus,
+#title:focus {
+  outline: none;
+  border: none;
+}
+.note-view-bottom-options {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 10px;
+}
+.btn {
+  box-shadow: var(--shadow) !important;
+}
+.save {
+  background-color: var(--accent);
+}
+.save:hover {
+  background-color: var(--accent-hover);
+}
