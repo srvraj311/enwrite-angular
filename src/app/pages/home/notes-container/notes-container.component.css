@@ -1,36 +1,7 @@
-.searchBar {
-  width: 80vw;
-  height: 40px;
-  padding: 20px !important;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.11), 0 3px 8px rgba(0, 0, 0, 0.13);
-}
-.btnSearch {
-  width: 40px;
-  height: 40px;
-  background-color: #ef0a60;
-  color: white;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.11), 0 3px 8px rgba(0, 0, 0, 0.13);
-}
-
-/* Search bar at Top */
-.search {
-  height: 8vh;
-  padding: 1rem 0;
-}
-.searchBar:focus {
-  outline: none;
-  border: none;
-}
-/* Main Div for notes display and view */
 .note-parent {
   display: flex;
   width: 100%;
-  height: 92vh;
-  position: relative;
-  bottom: 0;
+  height: 100vh;
 }
 
 .note-view {
@@ -45,8 +16,8 @@
   overflow-y: scroll;
   transition: all 0.5s ease-out;
   transition-delay: 0s;
-  padding: 0px 0.5rem;
-  margin-top: 1.5rem;
+  padding: 0 0.6rem;
+  margin-top: 10px;
 }
 .notes-container:first-child {
   padding-top: 0px;

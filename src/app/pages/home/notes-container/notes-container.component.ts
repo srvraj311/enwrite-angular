@@ -12,7 +12,6 @@ import { NotesService } from 'src/app/services/notes.service';
 })
 export class NotesContainerComponent implements OnInit {
   notesArr!: Note[];
-  arr!: number[];
   selectedNote!: Note;
   constructor(private noteService: NotesService, private db: Firestore) {}
 
@@ -23,10 +22,9 @@ export class NotesContainerComponent implements OnInit {
       var obj = localStorage.getItem('notes');
       this.notesArr = JSON.parse(obj!.toString());
     } else {
-      this.noteService.getNotes().subscribe((data) => {
+      this.noteService.notesObservable.subscribe((data) => {
+        // Fetching from observable
         this.notesArr = data as Note[];
-        this.arr = new Array(this.notesArr.length);
-        localStorage.setItem('notes', JSON.stringify(this.notesArr));
       });
     }
   }

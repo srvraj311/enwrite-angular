@@ -1,0 +1,45 @@
+.profile {
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+}
+.profile img {
+  height: 80px;
+  border: 3px solid white;
+  border-radius: 50%;
+}
+.profile_details {
+  color: black;
+  padding-left: 1rem;
+}
+
+.toolbar {
+  display: block;
+  margin: 10px 0px;
+  background-color: white;
+  border: 1px solid var(--light-gray);
+  border-radius: 10px;
+}
+
+.options {
+  border-top: 1pt solid var(--light-gray);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.toolbar button {
+  border: none;
+  background-color: white;
+  color: grey;
+  height: 40px;
+  width: 100%;
+}
+.toolbar button:hover {
+  background-color: var(--light-gray);
+}
+.name {
+  font-size: 1.2rem;
+}
+.email {
+  font-size: 0.7rem;
+}

@@ -34,6 +34,7 @@ import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { NoteViewComponent } from './pages/home/note-view/note-view.component';
+import { ToolbarComponent } from './pages/home/toolbar/toolbar.component';
 
 const routes: Routes = [
   { path: '', component: SplashScreenComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
     NotesContainerComponent,
     NoteComponent,
     NoteViewComponent,
+    ToolbarComponent,
   ],
   imports: [
     BrowserModule,

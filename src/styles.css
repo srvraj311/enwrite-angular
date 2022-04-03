@@ -10,6 +10,7 @@
   --accent: #ef0a6a;
   --accent-hover: #c10855;
   --accent-secondary: #b6359c;
+  --light-gray: #e8e8e8;
   --shadow : box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08), 0 3px 8px rgba(0, 0, 0, 0.01);
 }
 * {

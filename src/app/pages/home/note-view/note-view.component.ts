@@ -10,7 +10,6 @@ export class NoteViewComponent implements OnInit {
   @Input() selectedNote!: Note;
   NO_NOTES_SELECTED: string = 'Create a new Note or select a note to view or ';
   constructor() {}
-
   ngOnInit(): void {}
   ngOnChanges(changes: SimpleChanges) {
     if (!changes['selectedNote'].firstChange) {

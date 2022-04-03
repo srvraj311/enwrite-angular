@@ -4,7 +4,11 @@
 >
   <div class="noteTitle">{{ note.note_title }}</div>
   <div class="noteBody">
-    {{ note.note_body }}
+    {{
+      note.note_body.length > 200
+        ? note.note_body.substring(0, 220) + "...."
+        : note.note_body
+    }}
   </div>
   <div class="noteDate">{{ time }}</div>
 </div>

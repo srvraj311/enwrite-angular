@@ -1,22 +1,6 @@
-<div class="search container">
-  <div class="search-container d-flex bd-highlight">
-    <input
-      name="search"
-      type="text"
-      placeholder="Search Notes"
-      class="searchBar p-2 flex-grow-1 bd-highlight"
-    />
-    <mat-icon
-      class="p-2 bd-highlight btnSearch mx-2"
-      aria-hidden="false"
-      aria-label="Example search icon"
-      >search</mat-icon
-    >
-  </div>
-</div>
 <div class="note-parent">
   <div class="notes-container">
-    <!-- <div class="column" *ngFor="let i of arr">Col</div> -->
+    <app-toolbar></app-toolbar>
     <app-note
       class="note"
       *ngFor="let x of notesArr; let i = index"

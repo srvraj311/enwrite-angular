@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import Note from '../models/Note';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { UserService } from './user.service';
 
 const CONSTANT_NOTES_REF: string = 'note';
@@ -10,20 +10,32 @@ const CONSTANT_USER_RED: string = 'users';
   providedIn: 'root',
 })
 export class NotesService {
-  notesArr!: Observable<any[]>;
-  binArr!: Observable<any[]>;
+  notesArr: BehaviorSubject<Note[]> = new BehaviorSubject<Note[]>([]);
+  binArr: BehaviorSubject<Note[]> = new BehaviorSubject<Note[]>([]);
+  notesObservable: Observable<Note[]> = this.notesArr.asObservable();
   constructor(
     private firestore: AngularFirestore,
     private userService: UserService
   ) {}
-  getNotes(): Observable<any[]> {
+  // Update the notes Observable to contain the latest changes
+  updateNotesObservable(notes: Note[]) {
+    this.notesArr.next(notes);
+    this.notesObservable.subscribe((n) => {
+      localStorage.setItem('notes', JSON.stringify(n));
+    });
+  }
+
+  // get notes from firebase
+  getNotes(): void {
     const userEmail: string = this.userService.getCurrentEmail();
-    this.notesArr = this.firestore
+    this.firestore
       .collection(CONSTANT_USER_RED)
       .doc(userEmail)
       .collection(CONSTANT_NOTES_REF)
-      .valueChanges();
-    return this.notesArr;
+      .valueChanges()
+      .subscribe((notes) => {
+        this.updateNotesObservable(notes as Note[]);
+      });
   }
 
   convertTimestampToMinutesAgo(time: number) {

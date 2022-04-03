@@ -1,17 +1,17 @@
 .note-editor {
   display: flex;
-  margin: 20px;
+  margin: 10px 20px;
   padding: 10px;
   flex-direction: column;
   border: 1px solid #e8e8e8;
   border-radius: 20px;
-  height: 90%;
+  height: calc(100vh - 20px);
 }
 #title {
   margin-top: 20px;
   height: 40px;
   padding: 20px;
-  border: 1px solid #969696;
+  border: 1px solid var(--light-gray);
   border: none;
   font-size: 1.3rem;
   border-radius: 10px;
@@ -19,8 +19,7 @@
 }
 #body {
   margin-top: 20px;
-  /* height: calc(100vh - 30vh); */
-  height: 60vh;
+  height: 100%;
   padding: 10px 20px !important;
   border: none;
   border-radius: 10px;
