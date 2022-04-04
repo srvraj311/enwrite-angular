@@ -18,16 +18,12 @@ import LoginReq from '../../models/LoginReq';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  constructor(private userService: UserService, private router: Router) {
-    if (this.userService.isUserLoggedIn()) {
-      this.router.navigate(['/home']);
-    }
-  }
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    if (this.userService.isUserLoggedIn()) {
-      this.router.navigate(['/home']);
-    }
+    // if (this.userService.isUserLoggedIn()) {
+    //   this.router.navigate(['/home']);
+    // }
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);

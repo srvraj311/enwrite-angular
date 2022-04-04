@@ -16,20 +16,27 @@ export class NotesContainerComponent implements OnInit {
   constructor(private noteService: NotesService, private db: Firestore) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('notes') !== null) {
-      //localStorage.removeItem('notes');
-
-      var obj = localStorage.getItem('notes');
-      this.notesArr = JSON.parse(obj!.toString());
-    } else {
-      this.noteService.notesObservable.subscribe((data) => {
-        // Fetching from observable
-        this.notesArr = data as Note[];
-      });
-    }
+    this.noteService.getNotes();
+    this.noteService.selectedNoteObservable.subscribe((n) => {
+      this.selectedNote = n;
+    });
+    // if (localStorage.getItem('notes') !== null) {
+    //   //localStorage.removeItem('notes');
+    //   var obj = localStorage.getItem('notes');
+    //   this.notesArr = JSON.parse(obj!.toString());
+    // } else {
+    //   this.noteService.notesObservable.subscribe((data) => {
+    //     // Fetching from observable
+    //     this.notesArr = data as Note[];
+    //     localStorage.setItem('notes', JSON.stringify(this.notesArr));
+    //   });
+    // }
+    this.noteService.notesObservable.subscribe((data) => {
+      this.notesArr = data as Note[];
+    });
   }
 
-  selectNote(i: number): void {
-    this.selectedNote = this.notesArr[i];
+  selectNote(n: Note): void {
+    this.noteService.updateSelectedNote(n);
   }
 }

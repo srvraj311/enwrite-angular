@@ -1,5 +1,5 @@
 export default interface Note {
-  note_id?: string;
+  note_id: string;
   note_title: string;
   note_body: string;
   note_date: number;
@@ -16,6 +16,7 @@ export default class Note implements Note {
     note_colour: string,
     pinned: boolean
   ) {
+    this.note_id = note_id;
     this.note_title = note_title;
     this.note_body = note_body;
     this.note_date = note_date;

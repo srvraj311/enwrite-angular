@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-splash-screen',
@@ -9,18 +10,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./splash-screen.component.css'],
 })
 export class SplashScreenComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
     setTimeout(() => this.isUserLoggedIn(), 2000);
   }
 
   isUserLoggedIn(): void {
-    var loggedIn = false;
-    if (localStorage.getItem('user') !== null) {
-      this.router.navigateByUrl('/home');
-    } else {
-      this.router.navigateByUrl('/login');
-    }
+    this.userService.isUserLoggedIn().subscribe((x) => {
+      if (x !== null) {
+        this.router.navigateByUrl('/home');
+      } else {
+        this.router.navigateByUrl('/login');
+      }
+    });
   }
 }

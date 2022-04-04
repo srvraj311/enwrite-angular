@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import Note from '../models/Note';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/compat/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserService } from './user.service';
+import { Router } from '@angular/router';
 
 const CONSTANT_NOTES_REF: string = 'note';
 const CONSTANT_USER_RED: string = 'users';
@@ -11,31 +15,47 @@ const CONSTANT_USER_RED: string = 'users';
 })
 export class NotesService {
   notesArr: BehaviorSubject<Note[]> = new BehaviorSubject<Note[]>([]);
-  binArr: BehaviorSubject<Note[]> = new BehaviorSubject<Note[]>([]);
+  //binArr: BehaviorSubject<Note[]> = new BehaviorSubject<Note[]>([]);
   notesObservable: Observable<Note[]> = this.notesArr.asObservable();
+
+  selectedNote: BehaviorSubject<Note> = new BehaviorSubject<Note>(
+    new Note('empty', 'Title', 'New Note', 0, '#FFFFFF', false)
+  );
+  selectedNoteObservable = this.selectedNote.asObservable();
+
   constructor(
     private firestore: AngularFirestore,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
+
+  updateSelectedNote(note: Note) {
+    this.selectedNote.next(note);
+  }
   // Update the notes Observable to contain the latest changes
   updateNotesObservable(notes: Note[]) {
     this.notesArr.next(notes);
-    this.notesObservable.subscribe((n) => {
-      localStorage.setItem('notes', JSON.stringify(n));
-    });
+    // this.notesObservable.subscribe((n) => {
+    //   localStorage.setItem('notes', JSON.stringify(n));
+    // });
   }
-
   // get notes from firebase
-  getNotes(): void {
-    const userEmail: string = this.userService.getCurrentEmail();
-    this.firestore
-      .collection(CONSTANT_USER_RED)
-      .doc(userEmail)
-      .collection(CONSTANT_NOTES_REF)
-      .valueChanges()
-      .subscribe((notes) => {
-        this.updateNotesObservable(notes as Note[]);
-      });
+  async getNotes(): Promise<void> {
+    this.userService.isUserLoggedIn().subscribe((user) => {
+      if (user !== null) {
+        const email = user.email;
+        const userRef: AngularFirestoreDocument<any> = this.firestore.doc(
+          `users/${email}`
+        );
+        userRef
+          .collection(CONSTANT_NOTES_REF)
+          .valueChanges()
+          .subscribe((notes) => {
+            this.updateNotesObservable(notes as Note[]);
+          });
+      }
+      console.log('Notes Refreshed');
+    });
   }
 
   convertTimestampToMinutesAgo(time: number) {

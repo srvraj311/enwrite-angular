@@ -1,5 +1,8 @@
 <div
-  *ngIf="selectedNote != undefined; else showEmptyMessage"
+  *ngIf="
+    selectedNote.note_id !== undefined && selectedNote.note_id !== 'empty';
+    else showEmptyMessage
+  "
   class="note-editor"
   [ngStyle]="{ background: selectedNote.note_colour }"
 >
@@ -26,5 +29,5 @@
 </div>
 
 <ng-template #showEmptyMessage>
-  {{ NO_NOTES_SELECTED }}
+  <p class="empty">{{ NO_NOTES_SELECTED }}</p>
 </ng-template>

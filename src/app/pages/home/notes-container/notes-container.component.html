@@ -3,13 +3,10 @@
     <app-toolbar></app-toolbar>
     <app-note
       class="note"
-      *ngFor="let x of notesArr; let i = index"
+      *ngFor="let x of notesArr"
       [note]="x"
-      (click)="selectNote(i)"
+      (click)="selectNote(x)"
     ></app-note>
   </div>
-  <app-note-view
-    class="note-view"
-    [selectedNote]="selectedNote"
-  ></app-note-view>
+  <app-note-view class="note-view"></app-note-view>
 </div>
