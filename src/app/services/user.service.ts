@@ -4,10 +4,19 @@ import { Router } from '@angular/router';
 import { signOut, UserCredential, UserInfo } from 'firebase/auth';
 import LoginReq from '../models/LoginReq';
 import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { User } from '../models/User';
+import { LoginComponent } from '../pages/login/login.component';
+import { AppComponent } from '../app.component';
+import { CustomMessageDialog } from '../UiComponets/CustomMessageDialog';
+import { FirebaseError } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root',
@@ -18,23 +27,63 @@ export class UserService {
     private authService: AngularFireAuth,
     private router: Router,
     public afs: AngularFirestore,
-    public ngZone: NgZone
+    public ngZone: NgZone,
+    private dialog: MatDialog
   ) {}
 
   // Sign in with email/password
-  async loginUser(loginReq: LoginReq) {
+  loginUser(loginReq: LoginReq) {
     var email = loginReq.email;
     var password = loginReq.password;
-    this.authService
+    return this.authService
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
+        console.log();
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error.message);
+        this.processError(error);
+        // Process Erros here
       });
   }
-
+  processError(error: FirebaseError) {
+    switch (error.code) {
+      case 'auth/user-not-found':
+        this.ngZone.run(() => {
+          this.openDialog(
+            'Invalid User',
+            'No user found with provide demail-id'
+          );
+        });
+        break;
+      case 'auth/wrong-password':
+        this.ngZone.run(() => {
+          this.openDialog(
+            'Wrong Credentials ',
+            'Provided credentials is incorrect, Please try again'
+          );
+        });
+        break;
+      default:
+        this.ngZone.run(() => {
+          this.openDialog(
+            ' Network Error ',
+            ' Error logging in: \n ' + error.code
+          );
+        });
+    }
+  }
+  openDialog(title: string, message: string): void {
+    const dialogRef = this.dialog.open(CustomMessageDialog, {
+      width: '250px',
+      hasBackdrop: true,
+      autoFocus: true,
+      data: { title: title, message: message },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   isUserLoggedIn() {
     return this.authService.authState;
   }

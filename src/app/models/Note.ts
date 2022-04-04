@@ -2,7 +2,7 @@ export default interface Note {
   note_id: string;
   note_title: string;
   note_body: string;
-  note_date: number;
+  note_date: string;
   note_colour: string;
   pinned: boolean;
 }
@@ -12,7 +12,7 @@ export default class Note implements Note {
     note_id: string,
     note_title: string,
     note_body: string,
-    note_date: number,
+    note_date: string,
     note_colour: string,
     pinned: boolean
   ) {
@@ -25,13 +25,13 @@ export default class Note implements Note {
   }
 
   static createNoteWithTitleAndBody(title: string, body: string) {
-    let date: number = Date.now();
+    let date: string = String(Date.now());
     //TODO : Remember to update these functions
     return new Note('', title, body, date, '#FFFFFF', false);
   }
 
   static createNoteWithIdTitleBody(id: string, title: string, body: string) {
-    let date: number = Date.now();
+    let date: string = String(Date.now());
     return new Note(id, title, body, date, '#FFFFFF', false);
   }
 }

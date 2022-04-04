@@ -31,13 +31,20 @@
   min-width: 180px;
   border-radius: 50%;
 }
-
+.login-form input {
+  background-color: #ffffff;
+}
 .btn-login {
   margin: 12px;
+  margin-top: 20px;
   width: 80%;
   max-width: 300px;
   justify-content: space-evenly;
   display: flex;
   flex-direction: row;
-  margin-bottom: 22px;
+  margin-bottom: 10px;
+}
+.btn:hover {
+  background-color: var(--accent-hover) !important;
+  color: white;
 }

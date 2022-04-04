@@ -7,6 +7,7 @@ import {
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
+import { v4 as uuidv4 } from 'uuid';
 
 const CONSTANT_NOTES_REF: string = 'note';
 const CONSTANT_USER_RED: string = 'users';
@@ -19,7 +20,7 @@ export class NotesService {
   notesObservable: Observable<Note[]> = this.notesArr.asObservable();
 
   selectedNote: BehaviorSubject<Note> = new BehaviorSubject<Note>(
-    new Note('empty', 'Title', 'New Note', 0, '#FFFFFF', false)
+    new Note('empty', 'Title', 'New Note', '', '#FFFFFF', false)
   );
   selectedNoteObservable = this.selectedNote.asObservable();
 
@@ -35,9 +36,6 @@ export class NotesService {
   // Update the notes Observable to contain the latest changes
   updateNotesObservable(notes: Note[]) {
     this.notesArr.next(notes);
-    // this.notesObservable.subscribe((n) => {
-    //   localStorage.setItem('notes', JSON.stringify(n));
-    // });
   }
   // get notes from firebase
   async getNotes(): Promise<void> {
@@ -51,10 +49,29 @@ export class NotesService {
           .collection(CONSTANT_NOTES_REF)
           .valueChanges()
           .subscribe((notes) => {
-            this.updateNotesObservable(notes as Note[]);
+            this.updateNotesObservable(<Note[]>notes);
           });
       }
       console.log('Notes Refreshed');
+    });
+  }
+  saveNote(note: Note) {
+    console.log(note);
+    this.userService.isUserLoggedIn().subscribe((user) => {
+      if (user !== null) {
+        const email = user.email;
+        const userRef: AngularFirestoreDocument<any> = this.firestore.doc(
+          `users/${email}`
+        );
+        if (note.note_id == 'new') {
+          // Change Note id Here
+          note.note_id = uuidv4();
+        }
+        userRef
+          .collection(CONSTANT_NOTES_REF)
+          .doc(note.note_id)
+          .set(Object.assign({}, note));
+      }
     });
   }
 
@@ -108,5 +125,28 @@ export class NotesService {
           );
       }
     return time;
+  }
+
+  filterNotes(sortBy: string) {
+    this.notesObservable.subscribe((n) => {
+      var n = n as Note[];
+      if (sortBy === 'time') {
+        n = n.sort((a, b) => {
+          return Number(b.note_date) - Number(a.note_date);
+        });
+      } else if (sortBy === 'title') {
+        n = n.sort((a, b) => {
+          return a.note_title.localeCompare(b.note_title);
+        });
+      } else if (sortBy === 'color') {
+        n = n.sort((a, b) => {
+          return a.note_colour.localeCompare(b.note_colour);
+        });
+      } else {
+        n = n.sort((a, b) => {
+          return Number(b.note_date) - Number(a.note_date);
+        });
+      }
+    });
   }
 }

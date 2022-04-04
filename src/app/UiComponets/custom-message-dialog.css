@@ -1,0 +1,11 @@
+.options {
+  margin-top: 20px;
+  display: flex;
+}
+.btn {
+  background-color: var(--accent);
+}
+.btn:hover {
+  background-color: var(--accent-hover);
+  color: white;
+}

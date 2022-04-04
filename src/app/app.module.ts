@@ -26,6 +26,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NotesContainerComponent } from './pages/home/notes-container/notes-container.component';
 import { NoteComponent } from './pages/home/note/note.component';
+import {
+  MatDialogModule,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+} from '@angular/material/dialog';
 
 // Firebase auth/firestore/app
 import { AngularFireModule } from '@angular/fire/compat';
@@ -35,6 +39,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { NoteViewComponent } from './pages/home/note-view/note-view.component';
 import { ToolbarComponent } from './pages/home/toolbar/toolbar.component';
+import { MaterialModule } from './material.module';
 
 const routes: Routes = [
   { path: '', component: SplashScreenComponent },
@@ -57,6 +62,7 @@ const routes: Routes = [
     ToolbarComponent,
   ],
   imports: [
+    MaterialModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
@@ -77,6 +83,7 @@ const routes: Routes = [
     MatRadioModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatDialogModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
@@ -95,8 +102,11 @@ const routes: Routes = [
     MatRadioModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatDialogModule,
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

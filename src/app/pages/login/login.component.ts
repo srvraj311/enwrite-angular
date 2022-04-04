@@ -10,6 +10,7 @@ import {
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import LoginReq from '../../models/LoginReq';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -18,12 +19,20 @@ import LoginReq from '../../models/LoginReq';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    // if (this.userService.isUserLoggedIn()) {
-    //   this.router.navigate(['/home']);
-    // }
+    this.userService.isUserLoggedIn().subscribe((user) => {
+      if (user) {
+        if (user.email !== null && user.emailVerified === true) {
+          this.router.navigate(['/home']);
+        }
+      }
+    });
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -42,7 +51,7 @@ export class LoginComponent implements OnInit {
     return '';
   }
 
-  login(form: NgForm): void {
+  login(form: NgForm) {
     var loginReq: LoginReq = {
       email: this.email.status === 'VALID' ? this.email.value : null,
       password: this.password.status === 'VALID' ? this.password.value : null,
@@ -59,4 +68,13 @@ export class LoginComponent implements OnInit {
       }
     }
   }
+  openDialog(title: string, message: string): void {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: '250px',
+      height: '200px',
+
+      data: { title: title, message: message },
+    });
+  }
+  signup(form: NgForm): void {}
 }

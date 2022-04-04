@@ -62,12 +62,18 @@
       <button
         mat-raised-button
         [ngStyle]="{ 'margin-right': '10px' }"
+        color="accent"
+        (click)="signup(f)"
         class="btn btn-block"
-        color="basic"
       >
-        Cancel
+        Sign-Up
       </button>
-      <button mat-raised-button class="btn btn-block" color="accent">
+      <button
+        mat-raised-button
+        (click)="login(f)"
+        class="btn btn-block"
+        color="accent"
+      >
         Log-In
       </button>
     </div>

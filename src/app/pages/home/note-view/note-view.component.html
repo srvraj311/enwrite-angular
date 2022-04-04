@@ -4,27 +4,36 @@
     else showEmptyMessage
   "
   class="note-editor"
-  [ngStyle]="{ background: selectedNote.note_colour }"
+  [ngStyle]="{ background: selectedColor }"
 >
   <input
     type="text"
     name="title"
     id="title"
-    [value]="selectedNote.note_title"
-    [ngStyle]="{ background: selectedNote.note_colour }"
+    [(ngModel)]="title"
+    [ngStyle]="{ background: selectedColor }"
   />
   <textarea
-    [ngStyle]="{ background: selectedNote.note_colour }"
-    [value]="selectedNote.note_body"
+    [ngStyle]="{ background: selectedColor }"
+    [(ngModel)]="body"
     name="body"
     id="body"
   ></textarea>
   <div class="note-view-bottom-options">
-    <div class="last_opened">21 hours ago</div>
+    <div class="last_opened">{{ time }}</div>
     <div>
-      <button class="btn btn-primary save">Save</button>
+      <button class="btn btn-primary save" (click)="saveNote()">Save</button>
       <button class="btn btn-primary">Clear</button>
     </div>
+  </div>
+  <div class="colorpicker">
+    <button
+      *ngFor="let item of colorArray"
+      mat-mini-fab
+      class="fab"
+      [ngStyle]="{ 'background-color': item }"
+      (click)="updateColor(item)"
+    ></button>
   </div>
 </div>
 
