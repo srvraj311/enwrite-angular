@@ -1,0 +1,7 @@
+.chipholder {
+  padding: 0.6rem 0px;
+}
+.chip {
+  background-color: white;
+  border: 1pt solid var(--light-gray);
+}

@@ -1,5 +1,6 @@
 <div
   class="container note rounded"
+  [ngClass]="{ selected: note == selectedNote }"
   [ngStyle]="{ background: note.note_colour }"
 >
   <div class="noteTitle">{{ note.note_title }}</div>

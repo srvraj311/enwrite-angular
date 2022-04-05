@@ -1,0 +1,19 @@
+<div class="chipholder">
+  <mat-chip-list aria-label="Fish selection" aria-multiselectable="false">
+    <mat-chip
+      #allChip="matChip"
+      (click)="allChip.select(); update('none')"
+      class="chip"
+      color="accent"
+      selected="true"
+      >All Notes</mat-chip
+    >
+    <mat-chip
+      #pinned="matChip"
+      (click)="pinned.select(); update('pin')"
+      class="chip"
+      color="accent"
+      >Pinned</mat-chip
+    >
+  </mat-chip-list>
+</div>

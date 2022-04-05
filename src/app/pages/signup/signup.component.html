@@ -1,1 +1,129 @@
-<p>signup works!</p>
+<div class="login-feilds-container"></div>
+
+<div class="center-container">
+  <form
+    autocomplete="off"
+    #f="ngForm"
+    (ngSubmit)="signup(f)"
+    class="login-form"
+  >
+    <img
+      class="img-small login-img"
+      alt="enWrite-icon"
+      src="/assets/pictures/user.png"
+    />
+    <label class="upload" for="upload">
+      <input
+        id="upload"
+        class="upload"
+        type="file"
+        #userPhoto
+        (change)="onFileSelected($event)"
+      />
+      Add Picture
+    </label>
+
+    <p class="font-primary font-large">Welcome to EnWrite</p>
+    <div><p class="font-primary font-align-left">Sign-Up</p></div>
+    <mat-form-field
+      color="accent-secondary"
+      class="login-input"
+      appearance="outline"
+    >
+      <mat-label>Enter your Name</mat-label>
+      <input
+        autocomplete="name"
+        matInput
+        placeholder="John Doe"
+        [formControl]="name"
+        required
+      />
+      <mat-error *ngIf="name.invalid">{{ getErrorMessage(email) }}</mat-error>
+    </mat-form-field>
+    <mat-form-field
+      color="accent-secondary"
+      class="login-input"
+      appearance="outline"
+    >
+      <mat-label>Enter your email</mat-label>
+      <input
+        matInput
+        placeholder="pat@example.com"
+        [formControl]="email"
+        required
+      />
+      <mat-error *ngIf="email.invalid">{{ getErrorMessage(email) }}</mat-error>
+    </mat-form-field>
+    <mat-form-field
+      color="accent-secondary"
+      class="login-input"
+      appearance="outline"
+    >
+      <mat-label>Enter your password</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        [type]="hide ? 'password' : 'text'"
+        [formControl]="password"
+        required
+      />
+      <mat-error *ngIf="password.invalid">{{
+        getErrorMessage(password)
+      }}</mat-error>
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field
+      color="accent-secondary"
+      class="login-input"
+      appearance="outline"
+    >
+      <mat-label>Enter your password</mat-label>
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        [formControl]="password"
+        required
+      />
+      <mat-error *ngIf="password.invalid">{{
+        getErrorMessage(password)
+      }}</mat-error>
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div class="btn-login">
+      <button
+        mat-raised-button
+        [ngStyle]="{ 'margin-right': '10px' }"
+        color="accent"
+        (click)="signup(f)"
+        class="btn btn-block"
+      >
+        Sign-Up
+      </button>
+      <button
+        mat-raised-button
+        (click)="login(f)"
+        class="btn btn-block"
+        color="accent"
+      >
+        Log-In
+      </button>
+    </div>
+  </form>
+</div>

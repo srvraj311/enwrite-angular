@@ -2,6 +2,7 @@
   font-size: 1.1rem;
 }
 .noteBody {
+  margin-top: 0.8rem;
   font-size: 0.8rem;
 }
 
@@ -21,4 +22,7 @@
 }
 .note:hover {
   cursor: pointer;
+}
+.selected {
+  border-left: 15px solid var(--accent);
 }

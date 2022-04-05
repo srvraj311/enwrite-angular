@@ -10,10 +10,14 @@ import { NotesService } from 'src/app/services/notes.service';
 export class NoteComponent implements OnInit {
   @Input() note!: Note;
   time: string = '';
+  selectedNote!: Note;
   constructor(private noteService: NotesService) {}
   ngOnInit(): void {
     this.time = this.noteService
       .convertTimestampToMinutesAgo(Number(this.note.note_date))
       .toString();
+    this.noteService.selectedNoteObservable.subscribe(
+      (x) => (this.selectedNote = x)
+    );
   }
 }

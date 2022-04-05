@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
+import { getMatIconFailedToSanitizeLiteralError } from '@angular/material/icon';
 import { collection } from 'firebase/firestore';
 import { collectionData } from 'rxfire/firestore';
 import Note from 'src/app/models/Note';
@@ -20,19 +21,34 @@ export class NotesContainerComponent implements OnInit {
     this.noteService.selectedNoteObservable.subscribe((n) => {
       this.selectedNote = n;
     });
-    if (localStorage.getItem('notes') != null) {
-      //localStorage.removeItem('notes');
-      var obj = localStorage.getItem('notes');
-      this.notesArr = JSON.parse(obj!.toString());
-    } else {
-      this.noteService.notesObservable.subscribe((data) => {
-        // Fetching from observable
-        this.notesArr = data as Note[];
-        localStorage.setItem('notes', JSON.stringify(this.notesArr));
-      });
-    }
+    // if (localStorage.getItem('notes') != null) {
+    //   //localStorage.removeItem('notes');
+    //   var obj = localStorage.getItem('notes');
+    //   this.notesArr = JSON.parse(obj!.toString());
+    // } else {
+    //   this.noteService.notesObservable.subscribe((data) => {
+    //     // Fetching from observable
+    //     this.notesArr = data as Note[];
+    //     localStorage.setItem('notes', JSON.stringify(this.notesArr));
+    //   });
+    // }
     this.noteService.notesObservable.subscribe((data) => {
-      this.notesArr = data as Note[];
+      this.filterNotes(data as Note[]);
+    });
+  }
+
+  filterNotes(notes: Note[]) {
+    this.noteService.notesFilterObservable.subscribe((s) => {
+      if (s === 'none') {
+        this.notesArr = notes;
+      } else if (s === 'pin') {
+        this.notesArr = [];
+        for (let x of notes) {
+          if (x.pinned) {
+            this.notesArr.push(x);
+          }
+        }
+      }
     });
   }
 

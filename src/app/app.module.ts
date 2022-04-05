@@ -40,11 +40,17 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { NoteViewComponent } from './pages/home/note-view/note-view.component';
 import { ToolbarComponent } from './pages/home/toolbar/toolbar.component';
 import { MaterialModule } from './material.module';
-
+import { ChipbarComponent } from './pages/home/chipbar/chipbar.component';
+import {
+  AngularFireStorageModule,
+  AngularFireStorageReference,
+  AngularFireUploadTask,
+} from '@angular/fire/compat/storage';
 const routes: Routes = [
   { path: '', component: SplashScreenComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   { path: '**', component: SplashScreenComponent, pathMatch: 'full' },
 ];
 
@@ -60,6 +66,7 @@ const routes: Routes = [
     NoteComponent,
     NoteViewComponent,
     ToolbarComponent,
+    ChipbarComponent,
   ],
   imports: [
     MaterialModule,
@@ -84,6 +91,7 @@ const routes: Routes = [
     MatButtonModule,
     MatCheckboxModule,
     MatDialogModule,
+    AngularFireStorageModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
@@ -105,7 +113,7 @@ const routes: Routes = [
     MatDialogModule,
   ],
   providers: [
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },
   ],
   bootstrap: [AppComponent],
 })

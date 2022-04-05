@@ -18,7 +18,8 @@ export class NotesService {
   notesArr: BehaviorSubject<Note[]> = new BehaviorSubject<Note[]>([]);
   //binArr: BehaviorSubject<Note[]> = new BehaviorSubject<Note[]>([]);
   notesObservable: Observable<Note[]> = this.notesArr.asObservable();
-
+  notesFilter: BehaviorSubject<string> = new BehaviorSubject<string>('none');
+  notesFilterObservable = this.notesFilter.asObservable();
   selectedNote: BehaviorSubject<Note> = new BehaviorSubject<Note>(
     new Note('empty', 'Title', 'New Note', '', '#FFFFFF', false)
   );
@@ -30,6 +31,9 @@ export class NotesService {
     private router: Router
   ) {}
 
+  setNotesFIlter(s: string) {
+    this.notesFilter.next(s);
+  }
   updateSelectedNote(note: Note) {
     this.selectedNote.next(note);
   }
