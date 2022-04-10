@@ -1,27 +1,45 @@
-# EnWriteAngular
+# enWrite - Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
+[![N|Solid](https://res.cloudinary.com/srvraj311/image/upload/v1626325102/Main_2_hu5xxl.png)](https://srvraj311.github.io)
 
-## Development server
+[![]()]()
+enWrite is an simple and clean web app for taking notes on the go that syncs across your devices.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Note taking and Real-Time cloud sync
+- Simple and Easy-to-use UI with Rich User Experience
+- Fully Responsive Design
 
-## Code scaffolding
+# New Features!
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Cross Platform (Android / Web)
+- Implimented a secure login and signup functionality using firebase authentication.
+- Used MVC architechure
+- Intuitive User Interface using Material Design
+- Realtime Data updation using angular firestore
 
-## Build
+## Languages and Libraries used:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Angular v13
+- Firebase (AngularFIre2 connector)
+- Angular Material
 
-## Running unit tests
+Use of third party libraries are kept minimal to explore the indepth features of the frameworks itself.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Installation
 
-## Running end-to-end tests
+You need to have [Node.js](https://nodejs.org/) installed and Angular CLI setup to run this.
+Install the dependencies and devDependencies and start the server for angular app.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```sh
+$ cd enwrite-angular
+$ npm install
+$ ng serve --o
+```
 
-## Further help
+### Screenshots
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![image](https://res.cloudinary.com/srvraj311/image/upload/v1649557495/Screenshot_2022-04-10_at_7.53.09_AM_hncqdj.png)
+![image](https://res.cloudinary.com/srvraj311/image/upload/v1649557497/Screenshot_2022-04-10_at_7.51.48_AM_oc2slg.png)
+![image](https://res.cloudinary.com/srvraj311/image/upload/v1649557496/Screenshot_2022-04-10_at_7.52.43_AM_gony1b.png)
+![image](https://res.cloudinary.com/srvraj311/image/upload/v1649557496/Screenshot_2022-04-10_at_7.52.33_AM_utemtp.png)
+![image](https://res.cloudinary.com/srvraj311/image/upload/v1649557495/Screenshot_2022-04-10_at_7.52.22_AM_jeyala.png)
