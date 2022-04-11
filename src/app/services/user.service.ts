@@ -93,6 +93,9 @@ export class UserService {
     });
   }
   isUserLoggedIn() {
+    this.authService.getRedirectResult().then((u) => {
+      console.log(u.user);
+    })
     return this.authService.authState;
   }
 

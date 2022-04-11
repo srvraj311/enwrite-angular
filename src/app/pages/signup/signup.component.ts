@@ -17,6 +17,7 @@ export class SignupComponent implements OnInit {
   hide = true;
   downloadUrl:string = '/assets/pictures/user.png';
   signedUp:boolean = false;
+  isEmailVerified:boolean = true;
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
   password2 = new FormControl('', [Validators.required ]);
@@ -56,14 +57,26 @@ export class SignupComponent implements OnInit {
             this.userService.isUserLoggedIn().subscribe((u) => {
               if(u?.email){
                 this.signedUp = true;
+                this.isEmailVerified = u.emailVerified;
               }
             })
         })
       }
   }
 
-  uploadPhoto(){
-    return ''
+  completeSignup(){
+    if(this.signedUp){
+      this.userService.isUserLoggedIn().subscribe((u) => {
+        if(u?.emailVerified){
+          this.router.navigate(['/home']).then(()=> {
+            console.log('Signup complete')
+          })
+        }
+        else{
+          window.alert('Email Not verified yet');
+        }
+      })
+    }
   }
   onFileSelected(event: any) {
     const n = Date.now();

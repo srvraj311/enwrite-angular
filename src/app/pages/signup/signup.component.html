@@ -140,9 +140,10 @@
       <button
         *ngIf="signedUp"
         mat-raised-button
-        (click)="uploadPhoto()"
+        (click)="completeSignup()"
         class="btn btn-block"
         color="accent"
+        [disabled] = "isEmailVerified"
       >
         Continue
       </button>

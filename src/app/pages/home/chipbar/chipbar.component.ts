@@ -15,6 +15,6 @@ export class ChipbarComponent implements OnInit {
 
   ngOnInit(): void {}
   update(type: string) {
-    this.notesService.setNotesFIlter(type);
+    this.notesService.setNoteFilter(type);
   }
 }

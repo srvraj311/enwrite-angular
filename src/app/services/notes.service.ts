@@ -31,7 +31,7 @@ export class NotesService {
     private router: Router
   ) {}
 
-  setNotesFIlter(s: string) {
+  setNoteFilter(s: string) {
     this.notesFilter.next(s);
   }
   updateSelectedNote(note: Note) {
