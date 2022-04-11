@@ -33,8 +33,8 @@ export class UserService {
 
   // Sign in with email/password
   loginUser(loginReq: LoginReq) {
-    var email = loginReq.email;
-    var password = loginReq.password;
+    const email = loginReq.email;
+    const password = loginReq.password;
     return this.authService
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
@@ -64,6 +64,14 @@ export class UserService {
           );
         });
         break;
+      case 'auth/email-already-in-use':
+        this.ngZone.run(() => {
+          this.openDialog(
+            'Email Already in Use',
+            'Provided email is already being used by another account, Please try with different email or login'
+          );
+        });
+        break;
       default:
         this.ngZone.run(() => {
           this.openDialog(
@@ -89,22 +97,19 @@ export class UserService {
   }
 
   async logoutUser() {
-    console.log('Logout Called');
-    await this.authService.signOut();
-    localStorage.removeItem('notes');
-    localStorage.removeItem('user');
-    console.log('Logout Processed');
+    localStorage.clear();
     this.ngZone.run(() => {
       this.router.navigate(['/login']);
       console.log('Logout Complete');
     });
+    return this.authService.signOut();
   }
   getCurrentEmail() {
     const user = JSON.parse(localStorage.getItem('user')!);
     return user.email;
   }
-  /* Setting up user data when sign in with username/password, 
-  sign up with username/password and sign in with social auth  
+  /* Setting up user data when sign in with username/password,
+  sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   SetUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
@@ -119,7 +124,7 @@ export class UserService {
     };
     this.authService.authState.subscribe((user) => {
       if (user) {
-        this.userData = user;
+        this.userData = user
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
       } else {
@@ -127,9 +132,43 @@ export class UserService {
         JSON.parse(localStorage.getItem('user')!);
       }
     });
-    this.router.navigate(['/home']);
     return userRef.set(userData, {
       merge: true,
     });
+  }
+
+  async signUpUser(name: any, email: any, password: any) {
+    console.log('Signup called');
+      this.authService.signOut().then(async () => {
+        await localStorage.clear();
+      })
+      return this.authService.createUserWithEmailAndPassword(email, password)
+        .then((user) => {
+           this.SendVerificationMail()
+           this.SetUserData(user.user);
+        }).then(() => {
+          return this.authService.currentUser.then((u) => u?.updateProfile({
+             displayName: name,
+             photoURL: 'https://res.cloudinary.com/srvraj311/image/upload/v1649646022/pp_t4m8ym.jpg'
+        }))
+      })
+        .catch((e) => {
+          console.log('Error')
+          this.processError(e);
+        })
+  }
+
+  async updateProfilePhoto(url : string){
+    return this.authService.currentUser.then((u) => {
+      u?.updateProfile({photoURL : url })
+    })
+  }
+
+  SendVerificationMail() {
+    return this.authService.currentUser
+      .then((u: any) => u.sendEmailVerification())
+      .then(() => {
+        console.log('User verification mail sent');
+      });
   }
 }

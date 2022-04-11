@@ -5,6 +5,7 @@ import { finalize, Observable } from 'rxjs';
 import LoginReq from 'src/app/models/LoginReq';
 import { NotesService } from 'src/app/services/notes.service';
 import { UserService } from 'src/app/services/user.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-signup',
@@ -13,17 +14,18 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SignupComponent implements OnInit {
   selectedFile!: File;
-  fb!: any;
-  downloadURL!: Observable<string>;
   hide = true;
+  downloadUrl:string = '/assets/pictures/user.png';
+  signedUp:boolean = false;
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
+  password2 = new FormControl('', [Validators.required ]);
   name = new FormControl('', Validators.required);
-  remeberDevice: FormControl = new FormControl(false);
   constructor(
     private userService: UserService,
     private notesService: NotesService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private router : Router
   ) {}
   getErrorMessage(f: FormControl) {
     if (f.hasError('required')) {
@@ -37,48 +39,44 @@ export class SignupComponent implements OnInit {
     }
     return '';
   }
-  ngOnInit(): void {}
-  login(form: NgForm) {
-    var loginReq: LoginReq = {
-      email: this.email.status === 'VALID' ? this.email.value : null,
-      password: this.password.status === 'VALID' ? this.password.value : null,
-      remeberDevice: this.remeberDevice.value,
-    };
-
-    if (loginReq.email != null && loginReq.password != null) {
-      this.userService.loginUser(loginReq);
-    } else {
-      if (loginReq.password == null) {
-        this.password.hasError('password') ? 'Not a valid password' : '';
-      } else if (loginReq.email == null) {
-        this.email.hasError('emial') ? 'Not a valid password' : '';
-      }
-    }
+  ngOnInit(): void {
+    console.log('Signup screen initiated')
   }
-  signup(form: NgForm) {}
+  login(form: NgForm) {
+    this.router.navigate(['/login']).then(()=>{});
+  }
+  signup(form: NgForm) {
+      const name = this.name.status == 'VALID' ? this.name.value : '';
+      const email = this.email.status === 'VALID' ? this.email.value : null
+      const password = this.password.status === 'VALID' ? this.password.value : null;
+      const password2 = this.password2.status === 'VALID' ? this.password2.value : null;
+
+      if(name && email && password){
+        this.userService.signUpUser(name , email, password).then(()=> {
+            this.userService.isUserLoggedIn().subscribe((u) => {
+              if(u?.email){
+                this.signedUp = true;
+              }
+            })
+        })
+      }
+  }
+
+  uploadPhoto(){
+    return ''
+  }
   onFileSelected(event: any) {
-    var n = Date.now();
+    const n = Date.now();
     const file = event.target.files[0];
     const filePath = `profilepics/`;
     const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(`${n}`, file);
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.downloadURL = fileRef.getDownloadURL();
-          this.downloadURL.subscribe((url) => {
-            if (url) {
-              this.fb = url;
-            }
-            console.log(this.fb);
-          });
-        })
-      )
-      .subscribe((url) => {
-        if (url) {
-          console.log(url);
-        }
-      });
+    const task = this.storage.upload(`profilepics/${n}`, file);
+    task.then((a) =>{
+        a.ref.getDownloadURL().then(url => {
+          this.userService.updateProfilePhoto(url).then(() => {
+            this.downloadUrl = url;
+          })
+        });
+    })
   }
 }

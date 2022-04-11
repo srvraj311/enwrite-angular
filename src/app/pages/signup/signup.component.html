@@ -4,28 +4,36 @@
   <form
     autocomplete="off"
     #f="ngForm"
-    (ngSubmit)="signup(f)"
     class="login-form"
   >
     <img
       class="img-small login-img"
       alt="enWrite-icon"
-      src="/assets/pictures/user.png"
+      src="/assets/icons/png/main.png"
+      *ngIf="!signedUp"
     />
-    <label class="upload" for="upload">
-      <input
-        id="upload"
-        class="upload"
-        type="file"
-        #userPhoto
-        (change)="onFileSelected($event)"
+    <img
+      *ngIf="signedUp"
+      class="img-small login-img"
+      alt="enWrite-icon"
+      [src]="downloadUrl"
+    />
+    <label *ngIf="signedUp" class="upload" for="upload">
+      <input *ngIf="signedUp"
+             id="upload"
+             class="upload"
+             type="file"
+             #userPhoto
+             (change)="onFileSelected($event)"
       />
       Add Picture
     </label>
 
-    <p class="font-primary font-large">Welcome to EnWrite</p>
-    <div><p class="font-primary font-align-left">Sign-Up</p></div>
+
+    <p *ngIf="!signedUp" class="font-primary font-large">Welcome to EnWrite</p>
+    <div *ngIf="!signedUp" ><p class="font-primary font-align-left">Sign-Up</p></div>
     <mat-form-field
+      *ngIf="!signedUp"
       color="accent-secondary"
       class="login-input"
       appearance="outline"
@@ -41,6 +49,7 @@
       <mat-error *ngIf="name.invalid">{{ getErrorMessage(email) }}</mat-error>
     </mat-form-field>
     <mat-form-field
+      *ngIf="!signedUp"
       color="accent-secondary"
       class="login-input"
       appearance="outline"
@@ -55,6 +64,7 @@
       <mat-error *ngIf="email.invalid">{{ getErrorMessage(email) }}</mat-error>
     </mat-form-field>
     <mat-form-field
+      *ngIf="!signedUp"
       color="accent-secondary"
       class="login-input"
       appearance="outline"
@@ -69,7 +79,7 @@
       />
       <mat-error *ngIf="password.invalid">{{
         getErrorMessage(password)
-      }}</mat-error>
+        }}</mat-error>
       <button
         mat-icon-button
         matSuffix
@@ -81,6 +91,7 @@
       </button>
     </mat-form-field>
     <mat-form-field
+      *ngIf="!signedUp"
       color="accent-secondary"
       class="login-input"
       appearance="outline"
@@ -94,7 +105,7 @@
       />
       <mat-error *ngIf="password.invalid">{{
         getErrorMessage(password)
-      }}</mat-error>
+        }}</mat-error>
       <button
         mat-icon-button
         matSuffix
@@ -108,6 +119,7 @@
 
     <div class="btn-login">
       <button
+        *ngIf="!signedUp"
         mat-raised-button
         [ngStyle]="{ 'margin-right': '10px' }"
         color="accent"
@@ -117,12 +129,22 @@
         Sign-Up
       </button>
       <button
+        *ngIf="!signedUp"
         mat-raised-button
         (click)="login(f)"
         class="btn btn-block"
         color="accent"
       >
         Log-In
+      </button>
+      <button
+        *ngIf="signedUp"
+        mat-raised-button
+        (click)="uploadPhoto()"
+        class="btn btn-block"
+        color="accent"
+      >
+        Continue
       </button>
     </div>
   </form>
