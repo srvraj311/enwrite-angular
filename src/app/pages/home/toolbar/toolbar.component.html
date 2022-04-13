@@ -4,6 +4,11 @@
     <div class="profile_details">
       <div class="name">{{ name }}</div>
       <div class="email">{{ email }}</div>
+      <div class="verified">
+        <img *ngIf="isEmailVerified" src="/assets/icons/png/correct.png" alt="verified_icon">
+        <img *ngIf="!isEmailVerified" src="/assets/icons/png/remove.png" alt="verified_icon">
+        <p>{{isEmailVerified ? 'Verified' : 'Not verified'}}</p>
+      </div>
     </div>
   </div>
   <div class="options">

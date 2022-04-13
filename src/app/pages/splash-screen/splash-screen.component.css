@@ -19,7 +19,7 @@
 .splash-title {
   font-size: 3.5em;
   font-weight: 10;
-  font-family: brand !important;
+  font-family: brand, sans-serif !important;
 }
 .spinner-small {
   margin-top: 20px;

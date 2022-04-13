@@ -1,22 +1,19 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { signOut, UserCredential, UserInfo } from 'firebase/auth';
 import LoginReq from '../models/LoginReq';
 import {
   MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { User } from '../models/User';
-import { LoginComponent } from '../pages/login/login.component';
-import { AppComponent } from '../app.component';
 import { CustomMessageDialog } from '../UiComponets/CustomMessageDialog';
 import { FirebaseError } from 'firebase/app';
+import {rejects} from "assert";
+import {signInWithEmailAndPassword} from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root',
@@ -38,12 +35,12 @@ export class UserService {
     return this.authService
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log();
-        this.SetUserData(result.user);
+        this.SetUserData(result.user).then();
+        return Promise.resolve();
       })
       .catch((error) => {
         this.processError(error);
-        // Process Erros here
+        return Promise.reject('Error in Login');
       });
   }
   processError(error: FirebaseError) {
@@ -93,19 +90,21 @@ export class UserService {
     });
   }
   isUserLoggedIn() {
-    this.authService.getRedirectResult().then((u) => {
-      console.log(u.user);
-    })
+    // this.authService.getRedirectResult().then((u) => {
+    //   console.log(u.user);
+    // })
     return this.authService.authState;
   }
 
   async logoutUser() {
-    localStorage.clear();
-    this.ngZone.run(() => {
-      this.router.navigate(['/login']);
-      console.log('Logout Complete');
-    });
-    return this.authService.signOut();
+    return this.authService.signOut().then(() => {
+        this.router.navigate(['/login']);
+        console.log('Logout Complete');
+        localStorage.clear();
+        sessionStorage.clear();
+    }).catch((err) => {
+      console.log(err)
+    })
   }
   getCurrentEmail() {
     const user = JSON.parse(localStorage.getItem('user')!);

@@ -15,6 +15,7 @@ export class ToolbarComponent implements OnInit {
   email!: string;
   name!: string;
   photoUrl! : string;
+  isEmailVerified : boolean = true;
   constructor(
     private notesService: NotesService,
     private userService: UserService
@@ -23,6 +24,7 @@ export class ToolbarComponent implements OnInit {
       this.name = user?.displayName as string;
       this.email = user?.email as string;
       this.photoUrl = user?.photoURL as string;
+      this.isEmailVerified = user?.emailVerified as boolean;
       if(!this.name) this.name = 'Welcome'
       if(this.photoUrl === ''  || !this.photoUrl){
         this.photoUrl = 'https://res.cloudinary.com/srvraj311/image/upload/v1626325102/Main_2_hu5xxl.png';
@@ -45,8 +47,8 @@ export class ToolbarComponent implements OnInit {
     );
     this.notesService.updateSelectedNote(tempNote);
   }
-  logout() {
-    this.userService.logoutUser().then(() => console.log('User Logged Out Successful'));
+   logout() {
+     this.userService.logoutUser().then(() => console.log('User Logged Out Successful'));
   }
   filter(type: string) {
     this.notesService.filterNotes(type);

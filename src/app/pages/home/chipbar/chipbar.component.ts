@@ -13,7 +13,7 @@ import { NotesService } from 'src/app/services/notes.service';
 export class ChipbarComponent implements OnInit {
   constructor(private notesService: NotesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit = (): void => {};
   update(type: string) {
     this.notesService.setNoteFilter(type);
   }

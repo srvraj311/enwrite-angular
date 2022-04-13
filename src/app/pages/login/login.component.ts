@@ -19,6 +19,7 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class LoginComponent implements OnInit {
   hide = true;
+  spinnerVisible: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -54,7 +55,8 @@ export class LoginComponent implements OnInit {
     return '';
   }
 
-  login(form: NgForm) {
+  async login(form: NgForm) {
+    this.spinnerVisible = true;
     const loginReq: LoginReq = {
       email: this.email.status === 'VALID' ? this.email.value : null,
       password: this.password.status === 'VALID' ? this.password.value : null,
@@ -62,14 +64,19 @@ export class LoginComponent implements OnInit {
     };
 
     if (loginReq.email != null && loginReq.password != null) {
-      this.userService.loginUser(loginReq).then(() => {
-        this.router.navigate(['/home'])
-      })
+      await this.userService.loginUser(loginReq)
+        .then((user) => {
+          this.router.navigate(['/home']).then(_ => this.spinnerVisible = false)
+        }).catch((e) => {
+          console.log('Login Error ' + e);
+          this.spinnerVisible = false
+        })
     } else {
+      this.spinnerVisible = false;
       if (loginReq.password == null) {
-        this.password.hasError('password') ? this.password.setValue('Not a valid password') : this.password.setValue('');
+        this.password.hasError('password') ? this.password.setValue('Not a valid password') : console.log();
       } else if (loginReq.email == null) {
-        this.email.hasError('email') ? this.password.setValue('Not a valid password') : this.password.setValue('');
+        this.email.hasError('email') ? this.password.setValue('Not a valid password') : console.log();
       }
     }
   }

@@ -43,3 +43,19 @@
 .email {
   font-size: 0.7rem;
 }
+.verified img{
+  height :20px;
+  float : left;
+}
+.verified{
+  height: 20px;
+  text-align: center;
+  display: flex;
+
+}
+.verified p {
+  font-size: 0.6rem;
+  height: 20px;
+  position: relative;
+  top: 10%;
+}
