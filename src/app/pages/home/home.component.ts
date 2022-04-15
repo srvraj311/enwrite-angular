@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
       if (x !== null) {
         console.log('HOME : Checking user login and retriving note');
       } else {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/login']).then(() => {console.log('Router : Home to Login')})
       }
     });
   }
