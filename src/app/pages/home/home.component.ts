@@ -12,7 +12,6 @@ export class HomeComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private notesService: NotesService
   ) {}
 
   ngOnInit(): void {
