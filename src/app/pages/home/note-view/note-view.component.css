@@ -1,17 +1,18 @@
 .note-editor {
   display: flex;
-  margin: 10px 20px;
+  margin: 12px 20px;
   padding: 10px;
   flex-direction: column;
   border: 1px solid #e8e8e8;
   border-radius: 20px;
-  height: calc(100vh - 20px);
+  height: calc(93vh - 20px);
+  position: relative;
+
 }
 #title {
   margin-top: 20px;
   height: 40px;
   padding: 20px;
-  border: 1px solid var(--light-gray);
   border: none;
   font-size: 1.3rem;
   border-radius: 10px;
@@ -58,6 +59,14 @@
   margin: 20px;
 }
 .fab {
+  height: 30px;
+  width: 30px;
   margin: 5px 10px;
   border: 1px solid white;
+  transition: all 0.5s ease;
+}
+@media screen and (max-width: 680px) {
+  .fab{
+    margin: 5px 5px;
+  }
 }

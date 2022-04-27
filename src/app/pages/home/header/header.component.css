@@ -1,0 +1,19 @@
+.header{
+  position: fixed;
+  display: block;
+  width: 100vw;
+  height: 6vh;
+  min-height: 50px;
+  background: var(--light-gray);
+}
+.nav-btn{
+  padding: 15px;
+  width: 60px;
+  float: left;
+  color: black;
+  height: 60px;
+}
+
+@media screen and (max-width: 680px) {
+
+}

@@ -1,20 +1,23 @@
 .note-parent {
   display: flex;
-  width: 100%;
-  height: 100vh;
+  width: 100vw;
+  height: 94vh;
 }
 
 .note-view {
+  left: 0;
   height: 100%;
   width: 100%;
-  flex: 1 1 auto;
+  transition: position 0.3s ease-in;
+  /*flex: 1 1 auto;*/
 }
 .notes-container {
+  position: relative;
   max-width: calc((100vw / 3) - 2rem);
-  flex: 0 0 auto;
-  min-width: 270px;
+  /*flex: 0 0 auto;*/
+  min-width: 300px;
   overflow-y: scroll;
-  transition: all 0.5s ease-out;
+  transition: all 0.2s ease-in;
   transition-delay: 0s;
   padding: 0 0.6rem;
   margin-top: 10px;
@@ -23,5 +26,7 @@
   padding-top: 0px;
 }
 
+
 @media screen and (max-width: 680px) {
+
 }

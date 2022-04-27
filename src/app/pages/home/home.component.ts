@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotesService } from 'src/app/services/notes.service';
 import { UserService } from 'src/app/services/user.service';
+import {UiService} from "../../services/ui.service";
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,10 @@ export class HomeComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-  ) {}
+
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.userService.isUserLoggedIn().subscribe((x) => {
@@ -23,4 +27,5 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
 }

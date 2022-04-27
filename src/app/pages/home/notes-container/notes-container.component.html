@@ -1,5 +1,6 @@
 <div class="note-parent">
-  <div class="notes-container">
+  <div [ngStyle]="{left : navOpen ? '-600px' : '0'}"
+       class="notes-container">
     <app-toolbar></app-toolbar>
     <app-chipbar></app-chipbar>
     <app-note
@@ -9,5 +10,5 @@
       (click)="selectNote(x)"
     ></app-note>
   </div>
-  <app-note-view class="note-view"></app-note-view>
+  <app-note-view [ngStyle]="{position : navOpen ? 'absolute' : 'relative'}" class="note-view"></app-note-view>
 </div>

@@ -27,7 +27,7 @@ export class ToolbarComponent implements OnInit {
       this.isEmailVerified = user?.emailVerified as boolean;
       if(!this.name) this.name = 'Welcome'
       if(this.photoUrl === ''  || !this.photoUrl){
-        this.photoUrl = 'https://res.cloudinary.com/srvraj311/image/upload/v1626325102/Main_2_hu5xxl.png';
+        this.photoUrl = 'https://res.cloudinary.com/srvraj311/image/upload/v1651051035/user_1_qfo7r5.png';
       }
     });
     this.filter('time');

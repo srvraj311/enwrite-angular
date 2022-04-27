@@ -5,6 +5,7 @@ import { collection } from 'firebase/firestore';
 import { collectionData } from 'rxfire/firestore';
 import Note from 'src/app/models/Note';
 import { NotesService } from 'src/app/services/notes.service';
+import {UiService} from "../../../services/ui.service";
 
 @Component({
   selector: 'app-notes-container',
@@ -14,7 +15,10 @@ import { NotesService } from 'src/app/services/notes.service';
 export class NotesContainerComponent implements OnInit {
   notesArr!: Note[];
   selectedNote!: Note;
-  constructor(private noteService: NotesService, private db: Firestore) {}
+  navOpen!: boolean;
+  constructor(private noteService: NotesService, private uiService : UiService) {
+    this.uiService.navStatus.subscribe(b => this.navOpen = b)
+  }
 
   ngOnInit(): void {
     this.noteService.getNotes();
@@ -55,4 +59,5 @@ export class NotesContainerComponent implements OnInit {
   selectNote(n: Note): void {
     this.noteService.updateSelectedNote(n);
   }
+
 }
