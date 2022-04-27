@@ -10,6 +10,7 @@
     type="text"
     name="title"
     id="title"
+    placeholder="Note Title"
     [(ngModel)]="title"
     [ngStyle]="{ background: selectedColor }"
   />
@@ -17,13 +18,14 @@
     [ngStyle]="{ background: selectedColor }"
     [(ngModel)]="body"
     name="body"
+    placeholder="Note Body"
     id="body"
   ></textarea>
   <div class="note-view-bottom-options">
-    <div class="last_opened">{{ time }}</div>
+    <p class="last_opened">{{ time }}</p>
     <div>
-      <button class="btn btn-primary save" (click)="saveNote()">Save</button>
-      <button class="btn btn-primary">Clear</button>
+      <button class="bt save" (click)="saveNote()"><mat-icon>done</mat-icon></button>
+      <button class="bt clear" (click)="clearInput()" ><mat-icon>clear</mat-icon></button>
     </div>
   </div>
   <div class="colorpicker">
@@ -38,5 +40,11 @@
 </div>
 
 <ng-template #showEmptyMessage>
-  <p class="empty">{{ NO_NOTES_SELECTED }}</p>
+  <div class="empty">
+    <img src="/assets/pictures/empty.jpeg" alt="Empty Element">
+    <br>
+    <p> Start by Creating a new note or Select an Existing Note </p>
+    <button class="btn btn-primary" (click)="addNewNote()">Create New</button>
+    <button class="btn btn-primary" (click)="toggleNav()">View Notes</button>
+  </div>
 </ng-template>

@@ -1,40 +1,42 @@
 <div class="toolbar">
-
   <div class="profile">
     <img [src]="photoUrl" alt="Profile Photo" />
+<!--    Name , Email , And Verified  -->
     <div class="profile_details">
-      <div class="name">{{ name }}</div>
-      <div class="email">{{ email }}</div>
-      <div class="verified">
-        <img *ngIf="isEmailVerified" src="/assets/icons/png/correct.png" alt="verified_icon">
-        <img *ngIf="!isEmailVerified" src="/assets/icons/png/remove.png" alt="verified_icon">
-        <p>{{isEmailVerified ? 'Verified' : 'Not verified'}}</p>
+      <div style="display: flex">
+        <div class="name">{{ name }}</div>
+        <div class="verified">
+          <img *ngIf="isEmailVerified" src="/assets/icons/png/correct.png" alt="verified_icon">
+          <img *ngIf="!isEmailVerified" src="/assets/icons/png/remove.png" alt="verified_icon">
+        </div>
       </div>
+      <div class="email">{{ email }}</div>
+
+<!--      Icons for Options -->
+      <div class="options">
+        <button (click)="addNewNote()">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button [matMenuTriggerFor]="menu" #menuTrigger>
+          <mat-icon>sort</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="filter('time')">
+            <mat-icon>access_time</mat-icon> <span>Sort By Time</span>
+          </button>
+          <button mat-menu-item (click)="filter('title')">
+            <mat-icon>title</mat-icon> <span>Sort By Title</span>
+          </button>
+          <button mat-menu-item (click)="filter('color')">
+            <mat-icon>color_lens</mat-icon> <span>Sort By Color</span>
+          </button>
+        </mat-menu>
+        <button (click)="logout()">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </div>
+
     </div>
   </div>
-  <div class="options">
-    <button (click)="addNewNote()">
-      <mat-icon>add</mat-icon>
-    </button>
-    <button>
-      <mat-icon>search</mat-icon>
-    </button>
-    <button [matMenuTriggerFor]="menu" #menuTrigger>
-      <mat-icon>sort</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="filter('time')">
-        <mat-icon>access_time</mat-icon> <span>Sort By Time</span>
-      </button>
-      <button mat-menu-item (click)="filter('title')">
-        <mat-icon>title</mat-icon> <span>Sort By Title</span>
-      </button>
-      <button mat-menu-item (click)="filter('color')">
-        <mat-icon>color_lens</mat-icon> <span>Sort By Color</span>
-      </button>
-    </mat-menu>
-    <button (click)="logout()">
-      <mat-icon>logout</mat-icon>
-    </button>
-  </div>
+
 </div>

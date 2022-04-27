@@ -1,13 +1,13 @@
 .note-editor {
   display: flex;
-  margin: 12px 20px;
-  padding: 10px;
   flex-direction: column;
-  border: 1px solid #e8e8e8;
-  border-radius: 20px;
+  border: 2px solid var(--border-color);
   height: calc(93vh - 20px);
   position: relative;
-
+  padding: 2rem 2rem 1rem;
+  margin: 0.8rem;
+  border-radius: 28px;
+  background-color: var(--offwhite-color);
 }
 #title {
   margin-top: 20px;
@@ -32,24 +32,38 @@
   outline: none;
   border: none;
 }
+.last_opened {
+  vertical-align: middle;
+}
 .note-view-bottom-options {
   display: flex;
   justify-content: space-between;
   margin: 20px 10px;
 }
-.btn {
+.bt {
+  position: relative;
+  border: none;
+  outline: none;
+  height: 60px;
+  width: 60px;
   box-shadow: var(--shadow) !important;
+  border-radius: 50%;
+  margin-right: 10px;
+  bottom: 0;
 }
-.save {
+mat-icon {
+  vertical-align: middle;
+  color: white;
+}
+.save , .clear{
   background-color: var(--accent);
 }
 .save:hover {
   background-color: var(--accent-hover);
 }
 .empty {
-  position: fixed;
-  top: 50%;
-  left: 10%;
+  position: relative;
+  top: 28%;
   text-align: center;
   width: 100%;
   height: 100%;
@@ -58,6 +72,7 @@
 .colorpicker {
   margin: 20px;
 }
+
 .fab {
   height: 30px;
   width: 30px;
@@ -68,5 +83,9 @@
 @media screen and (max-width: 680px) {
   .fab{
     margin: 5px 5px;
+  }
+  .bt{
+    width: 45px;
+    height: 45px;
   }
 }

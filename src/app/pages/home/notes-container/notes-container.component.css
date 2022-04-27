@@ -3,30 +3,40 @@
   width: 100vw;
   height: 94vh;
 }
-
 .note-view {
   left: 0;
   height: 100%;
   width: 100%;
   transition: position 0.3s ease-in;
-  /*flex: 1 1 auto;*/
 }
 .notes-container {
+  border: 2px solid var(--border-color);
   position: relative;
-  max-width: calc((100vw / 3) - 2rem);
-  /*flex: 0 0 auto;*/
-  min-width: 300px;
+  max-width: 500px;
+  min-width: 500px;
   overflow-y: scroll;
   transition: all 0.2s ease-in;
   transition-delay: 0s;
-  padding: 0 0.6rem;
-  margin-top: 10px;
+  padding: 2rem 2rem 1rem;
+  margin: 0.8rem;
+  border-radius: 28px;
+  background-color: var(--offwhite-color);
 }
 .notes-container:first-child {
-  padding-top: 0px;
+  padding-top: 0;
 }
 
-
-@media screen and (max-width: 680px) {
-
+@media screen and (max-width: 550px) {
+  .notes-container {
+    max-width: 96vw;
+    width: 96vw;
+    min-width: 96vw;
+  }
+}
+@media screen and (max-width: 380px) {
+  .notes-container {
+    max-width: 94vw;
+    width: 94vw;
+    min-width: 94vw;
+  }
 }

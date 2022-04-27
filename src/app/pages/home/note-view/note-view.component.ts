@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import Note from 'src/app/models/Note';
 import { NotesService } from 'src/app/services/notes.service';
+import {UiService} from "../../../services/ui.service";
 
 @Component({
   selector: 'app-note-view',
@@ -24,8 +25,7 @@ export class NoteViewComponent implements OnInit {
   ];
   selectedColor: string = '#FFFFFF';
 
-  NO_NOTES_SELECTED: string = 'Create a new Note or select a note to view or ';
-  constructor(private notesService: NotesService) {
+  constructor(private notesService: NotesService, private uiService : UiService) {
     notesService.selectedNoteObservable.subscribe((n) => {
       this.selectedNote = n;
       this.time = notesService.convertTimestampToMinutesAgo(
@@ -59,7 +59,29 @@ export class NoteViewComponent implements OnInit {
       );
     }
   }
+  addNewNote() {
+    const date: string = String(+Date.now());
+    const tempNote: Note = new Note(
+      'new',
+      'New Note',
+      '',
+      date,
+      '#FFFFFF',
+      false
+    );
+    this.notesService.updateSelectedNote(tempNote);
+  }
+
   updateColor(color: string) {
     this.selectedColor = color;
+  }
+
+  clearInput() {
+    this.title = ""
+    this.body = ""
+  }
+
+  toggleNav() {
+    this.uiService.navOpen.next(!this.uiService.navOpen.value);
   }
 }

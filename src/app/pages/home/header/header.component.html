@@ -1,5 +1,13 @@
 <header class="header">
-  <mat-icon (click)="toggleNav()" class="nav-btn">menu</mat-icon>
+  <mat-icon *ngIf="navOpen" (click)="toggleNav()" class="nav-btn">menu</mat-icon>
+  <mat-icon *ngIf="!navOpen" (click)="toggleNav()" class="nav-btn">keyboard_arrow_left</mat-icon>
+  <img
+    alt="enWrite-icon"
+    height="40px"
+    src="/assets/icons/png/main.png"
+  />
+  <p class="title">enWrite</p>
+
 </header>
 
 

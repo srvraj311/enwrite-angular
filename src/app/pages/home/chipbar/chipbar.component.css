@@ -1,5 +1,21 @@
 .chipholder {
-  padding: 0.6rem 0px;
+  padding: 0.6rem 1.2rem;
+}
+mat-chip{
+  height: 38px;
+  max-width: 102px;
+  font-size: 12px;
+  text-align: center;
+  letter-spacing: 1px;
+  font-family: Raleway, sans-serif;
+  font-weight: 500;
+  border-radius: 28px;
+  box-shadow: 5px 5px 10px rgba(0 , 0, 0 , 0.09);
+  border: none;
+  outline: none;
+}
+mat-chip:focus{
+  color: white;
 }
 .chip {
   background-color: white;

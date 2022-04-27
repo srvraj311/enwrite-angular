@@ -2,25 +2,32 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700&display=swap');
+
 @font-face {
   font-family: brand;
   src: url("/src/assets/fonts/Vonique64.ttf");
 }
+
 :root {
   --accent: #ef0a6a;
   --accent-hover: #c10855;
   --accent-secondary: #b6359c;
   --light-gray: #e8e8e8;
-  --shadow : box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08), 0 3px 8px rgba(0, 0, 0, 0.01);
+  --border-color : #dedede;
+  --offwhite-color : #fefefe;
+  --shadow : 0 10px 15px rgba(0, 0, 0, 0.08), 0 3px 8px rgba(0, 0, 0, 0.01);
+  --shadow-wide :  15px 15px 25px rgba(233, 176, 211, 0.43)
 }
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
 }
 
 body {
-  font-family: "Varela Round", sans-serif;
+  font-family: 'Raleway', sans-serif !important;
 }
 
 .center-container {
@@ -94,6 +101,7 @@ body {
 /* width */
 ::-webkit-scrollbar {
   width: 5px;
+  display: none;
 }
 
 /* Track */

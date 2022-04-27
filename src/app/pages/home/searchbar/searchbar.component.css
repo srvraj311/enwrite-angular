@@ -1,0 +1,30 @@
+.searchbar{
+  display: block;
+  width: 100%;
+  padding: 1rem 1.2rem !important;
+}
+.searchbar input {
+  background: linear-gradient(90deg, #e9bad9 , #e967a3);;
+  border: none;
+  border-radius: 28px;
+  padding: 0.6rem 1.2rem;
+  width: 100%;
+  color: white;
+  box-shadow: var(--shadow-wide);
+}
+.searchbar input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 0.8; /* Firefox */
+}
+.searchbar mat-icon{
+  position: absolute;
+  right: 4.7rem;
+  top : 190px;
+  color: white;
+  vertical-align: middle;
+}
+.searchbar input:focus{
+  outline: none;
+  border: none;
+}
+

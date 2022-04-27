@@ -46,6 +46,7 @@ import {
   AngularFireStorageReference,
   AngularFireUploadTask,
 } from '@angular/fire/compat/storage';
+import { SearchbarComponent } from './pages/home/searchbar/searchbar.component';
 const routes: Routes = [
   { path: '', component: SplashScreenComponent },
   { path: 'home', component: HomeComponent },
@@ -67,6 +68,7 @@ const routes: Routes = [
     NoteViewComponent,
     ToolbarComponent,
     ChipbarComponent,
+    SearchbarComponent,
   ],
   imports: [
     MaterialModule,

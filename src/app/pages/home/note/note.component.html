@@ -1,7 +1,7 @@
 <div
   class="container note rounded"
-  [ngClass]="{ selected: note == selectedNote }"
-  [ngStyle]="{ background: note.note_colour }"
+  [ngStyle]="{ borderLeft : '20px solid ' + note.note_colour ,
+   outline : note === selectedNote ? '1px solid var(--accent)' : '1px solid var(--light-gray)'}"
 >
   <div class="noteTitle">{{ note.note_title }}</div>
   <div class="noteBody">
@@ -11,5 +11,5 @@
         : note.note_body
     }}
   </div>
-  <div class="noteDate">{{ time }}</div>
+  <div class="noteDate"><mat-icon>access_time</mat-icon>{{ time }}</div>
 </div>

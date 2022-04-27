@@ -1,17 +1,37 @@
+@font-face {
+  font-family: brand;
+  src: url("/assets/fonts/Vonique64.ttf");
+}
 .header{
   position: fixed;
   display: block;
+  flex-direction: row;
   width: 100vw;
   height: 6vh;
   min-height: 50px;
-  background: var(--light-gray);
+  background: transparent;
 }
 .nav-btn{
   padding: 15px;
   width: 60px;
   float: left;
-  color: black;
+  color: var(--accent);
+  font-size: 2rem;
   height: 60px;
+  margin-left: 10px;
+}
+img {
+  margin-left: 0.5rem;
+  margin-top: 0.7rem;
+  float: left;
+}
+.title {
+  font-family: brand, sans-serif !important;
+  align-items: center;
+  float: left;
+  margin-top: 1.42rem;
+  margin-left: 0.5rem;
+  font-size: 1.5rem;
 }
 
 @media screen and (max-width: 680px) {
