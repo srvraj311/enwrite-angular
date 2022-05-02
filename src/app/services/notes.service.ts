@@ -116,7 +116,7 @@ export class NotesService {
         userRef
           .collection(CONSTANT_NOTES_REF)
           .doc(note.note_id)
-          .set(Object.assign({}, note)).then(_ => this.uiService.showMessage('Note Saved'))
+          .set(Object.assign({}, note)).then(_ => this.uiService.showMessage('Note Saved')).catch( _ => this.uiService.showMessage('Failed to Save Note'))
       }
     });
   }

@@ -1,6 +1,15 @@
-import {Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import Note from 'src/app/models/Note';
-import { NotesService } from 'src/app/services/notes.service';
+import {NotesService} from 'src/app/services/notes.service';
 import {UiService} from "../../../services/ui.service";
 
 @Component({
@@ -8,12 +17,12 @@ import {UiService} from "../../../services/ui.service";
   templateUrl: './note-view.component.html',
   styleUrls: ['./note-view.component.css'],
 })
-export class NoteViewComponent implements OnInit {
+export class NoteViewComponent implements OnInit, OnDestroy, OnChanges {
   selectedNote!: Note;
   time!: string;
   title!: string;
   body!: string;
-  @ViewChild('#bodyInput') bodyElement:ElementRef = new ElementRef<any>('textarea');
+  @ViewChild('#bodyInput') bodyElement: ElementRef = new ElementRef<any>('textarea');
   colorArray: string[] = [
     '#FFFFFF',
     '#ACACAC',
@@ -26,7 +35,7 @@ export class NoteViewComponent implements OnInit {
   ];
   selectedColor: string = '#FFFFFF';
 
-  constructor(private notesService: NotesService, private uiService : UiService) {
+  constructor(private notesService: NotesService, private uiService: UiService) {
     notesService.selectedNoteObservable.subscribe((n) => {
       this.selectedNote = n;
       this.time = notesService.convertTimestampToMinutesAgo(
@@ -37,20 +46,13 @@ export class NoteViewComponent implements OnInit {
       this.selectedColor = n.note_colour;
     });
   }
+
   ngOnInit(): void {
+    this.clearSelectedNoteScreen();
 
   }
-  saveNote() {
-    const date: string = String(+new Date());
-    const note: Note = new Note(
-      this.selectedNote.note_id,
-      this.title,
-      this.body,
-      date,
-      this.selectedColor,
-      false
-    );
-    this.notesService.saveNote(note);
+
+  clearSelectedNoteScreen() {
     if (this.selectedNote.note_id == 'new') {
       this.selectedNote = new Note(
         'empty',
@@ -61,6 +63,25 @@ export class NoteViewComponent implements OnInit {
         false
       );
     }
+  }
+
+  saveNote() {
+    const date: string = String(+new Date());
+    if (this.body !== '') {
+      const note: Note = new Note(
+        this.selectedNote.note_id,
+        this.title,
+        this.body,
+        date,
+        this.selectedColor,
+        false
+      );
+      this.notesService.saveNote(note);
+    } else {
+      this.uiService.showMessage('Empty Note Discarded');
+      this.clearSelectedNoteScreen();
+    }
+
   }
 
   addNewNote() {
@@ -85,4 +106,12 @@ export class NoteViewComponent implements OnInit {
     this.body = ""
   }
 
+  ngOnDestroy(): void {
+    this.saveNote();
+  }
+
+  ngOnChanges(changes:SimpleChanges): void {
+    console.log(changes);
+    setTimeout(this.bodyElement.nativeElement.focus(), 0);
+  }
 }
