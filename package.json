@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "electron:local": "sudo ng build --base-href && electron .",
+    "electron:local": "electron .",
     "electron:serve": "wait-on tcp:4200 && electron . --serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
@@ -62,5 +62,6 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~4.5.2"
-  }
+  },
+  "files": ["!**/dist/*"]
 }

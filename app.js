@@ -17,13 +17,14 @@ function createWindow() {
   win = new electron_1.BrowserWindow({
     x: 550,
     y: 768,
-    minWidth: 550  ,
+    minWidth: 550,
     minHeight: 768,
     width: size.width,
     height: size.height,
     frame: false,
     webPreferences: {
-      devTools : false,
+      devTools: true,
+      webSecurity: false,
       nodeIntegration: true,
       allowRunningInsecureContent: (serve),
       contextIsolation: false,
@@ -37,16 +38,11 @@ function createWindow() {
     win.loadURL('http://localhost:4200').then(r => console.log('Loaded Localhost'));
   } else {
     // Path when running electron executable
-    let pathIndex = './index.html';
-    if (fs.existsSync(path.join(__dirname, '../dist/en-write-angular/index.html'))) {
-      // Path when running electron in local folder
-      pathIndex = '../dist/en-write-angular/index.html';
-    }
-    win.loadURL(url.format({
-      pathname: path.join(__dirname, pathIndex),
-      protocol: 'file:',
-      slashes: true
-    }));
+    let pathIndex = '/dist/en-write-angular/index.html';
+
+    win.loadURL('file://' + __dirname + pathIndex)
+      .then(_ => console.log(path.join(__dirname, pathIndex)))
+      .catch(e => console.log(e))
   }
 
   // Emitted when the window is closed.
