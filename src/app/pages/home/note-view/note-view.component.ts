@@ -85,7 +85,4 @@ export class NoteViewComponent implements OnInit {
     this.body = ""
   }
 
-  toggleNav() {
-    this.uiService.navOpen.next(!this.uiService.navOpen.value);
-  }
 }

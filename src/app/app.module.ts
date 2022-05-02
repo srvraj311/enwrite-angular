@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -94,6 +95,7 @@ const routes: Routes = [
     MatCheckboxModule,
     MatDialogModule,
     AngularFireStorageModule,
+    MatSnackBarModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),

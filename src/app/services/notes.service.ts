@@ -9,6 +9,7 @@ import {UserService} from './user.service';
 import {Router} from '@angular/router';
 import {v4 as uuidv4} from 'uuid';
 import {ref} from "@angular/fire/storage";
+import {UiService} from "./ui.service";
 
 
 const CONSTANT_NOTES_REF: string = 'note';
@@ -31,7 +32,8 @@ export class NotesService {
   constructor(
     private firestore: AngularFirestore,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private uiService: UiService
   ) {
   }
 
@@ -64,13 +66,13 @@ export class NotesService {
         userRef
           .collection(CONSTANT_NOTES_REF)
           .valueChanges().subscribe(n => {
-            n = n as Note[]
-            let filteredNote:Note[] = [];
-            for(let note of n){
-              if(note['note_title'].toLowerCase().includes(searchText.toLowerCase()) || note['note_body'].toLowerCase().includes(searchText.toLowerCase())){
-                filteredNote.push(note as Note);
-              }
+          n = n as Note[]
+          let filteredNote: Note[] = [];
+          for (let note of n) {
+            if (note['note_title'].toLowerCase().includes(searchText.toLowerCase()) || note['note_body'].toLowerCase().includes(searchText.toLowerCase())) {
+              filteredNote.push(note as Note);
             }
+          }
           this.updateNotesObservable(filteredNote);
         })
       }
@@ -109,13 +111,12 @@ export class NotesService {
           `users/${email}`
         );
         if (note.note_id == 'new') {
-          // Change Note id Here
           note.note_id = uuidv4();
         }
         userRef
           .collection(CONSTANT_NOTES_REF)
           .doc(note.note_id)
-          .set(Object.assign({}, note)).then(r => console.log('Note Saved'));
+          .set(Object.assign({}, note)).then(_ => this.uiService.showMessage('Note Saved'))
       }
     });
   }
@@ -206,7 +207,7 @@ export class NotesService {
         userRef
           .collection(CONSTANT_NOTES_REF)
           .doc(note.note_id)
-          .delete();
+          .delete().then( _ => this.uiService.showMessage("Note Deleted"))
       }
     });
     this.clearSelectedNote();
