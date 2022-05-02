@@ -4,27 +4,34 @@
     else showEmptyMessage
   "
   class="note-editor"
+  [ngStyle]="{borderTop : '30px solid ' + selectedColor}"
 >
   <input
     type="text"
     name="title"
     id="title"
-    [ngStyle]="{background : selectedColor}"
     placeholder="Note Title"
     [(ngModel)]="title"
+
   />
   <textarea
     #bodyInput
-    [(ngModel)]="body"
+    [(ngModel)]=" body"
     name="body"
     placeholder="Note Body"
     id="body"
   ></textarea>
   <div class="note-view-bottom-options">
-    <div class="last_opened"><mat-icon>access_time</mat-icon>{{ time }}</div>
+    <div class="last_opened">
+      <mat-icon>access_time</mat-icon>
+      {{ time }}</div>
     <div>
-      <button class="bt save" (click)="saveNote()"><mat-icon>done</mat-icon></button>
-      <button class="bt clear" (click)="clearInput()" ><mat-icon>backspace</mat-icon></button>
+      <button class="bt save" (click)="saveNote()">
+        <mat-icon>done</mat-icon>
+      </button>
+      <button class="bt clear" (click)="clearInput()">
+        <mat-icon>backspace</mat-icon>
+      </button>
     </div>
   </div>
   <div class="colorpicker">
@@ -32,6 +39,7 @@
       *ngFor="let item of colorArray"
       mat-mini-fab
       class="fab"
+      [class.mat-elevation-z1]="true"
       [ngStyle]="{ 'background-color': item }"
       (click)="updateColor(item)"
     ></button>
@@ -43,6 +51,9 @@
     <img src="/assets/pictures/empty.jpeg" alt="Empty Element">
     <br>
     <p> Start by Creating a new note or Select an Existing Note </p>
-    <button class="btn btn-primary" (click)="addNewNote()"><mat-icon style="margin-right: 5px">add</mat-icon>Create New</button>
+    <button class="btn btn-primary" (click)="addNewNote()">
+      <mat-icon style="margin-right: 5px">add</mat-icon>
+      Create New
+    </button>
   </div>
 </ng-template>

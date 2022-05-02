@@ -17,6 +17,7 @@
   --border-color : #dedede;
   --offwhite-color : #fefefe;
   --shadow : 0 10px 15px rgba(0, 0, 0, 0.08), 0 3px 8px rgba(0, 0, 0, 0.01);
+  --shadow-lite : 0 3px 5px rgba(0, 0, 0, 0.03), 0 3px 8px rgba(0, 0, 0, 0.01);
   --shadow-wide :  15px 15px 25px rgba(233, 176, 211, 0.43)
 }
 * {
