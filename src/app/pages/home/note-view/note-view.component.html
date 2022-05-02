@@ -4,19 +4,18 @@
     else showEmptyMessage
   "
   class="note-editor"
-  [ngStyle]="{ background: selectedColor }"
+
 >
   <input
     type="text"
     name="title"
     id="title"
+    [ngStyle]="{background : selectedColor}"
     placeholder="Note Title"
     [(ngModel)]="title"
-    [ngStyle]="{ background: selectedColor }"
   />
   <textarea
     #bodyInput
-    [ngStyle]="{ background: selectedColor }"
     [(ngModel)]="body"
     name="body"
     placeholder="Note Body"

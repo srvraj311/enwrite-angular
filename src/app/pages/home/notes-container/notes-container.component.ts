@@ -21,21 +21,10 @@ export class NotesContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.noteService.getNotes();
+    this.noteService.getNotes().then(r => console.log('Notes Fetched'));
     this.noteService.selectedNoteObservable.subscribe((n) => {
       this.selectedNote = n;
     });
-    // if (localStorage.getItem('notes') != null) {
-    //   //localStorage.removeItem('notes');
-    //   var obj = localStorage.getItem('notes');
-    //   this.notesArr = JSON.parse(obj!.toString());
-    // } else {
-    //   this.noteService.notesObservable.subscribe((data) => {
-    //     // Fetching from observable
-    //     this.notesArr = data as Note[];
-    //     localStorage.setItem('notes', JSON.stringify(this.notesArr));
-    //   });
-    // }
     this.noteService.notesObservable.subscribe((data) => {
       this.filterNotes(data as Note[]);
     });
@@ -57,6 +46,9 @@ export class NotesContainerComponent implements OnInit {
   }
 
   selectNote(n: Note): void {
+    if(this.uiService.isMobile){
+      this.uiService.navOpen.next(!this.uiService.navOpen.value);
+    }
     this.noteService.updateSelectedNote(n);
   }
 

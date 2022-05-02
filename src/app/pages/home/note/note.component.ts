@@ -24,6 +24,8 @@ export class NoteComponent implements OnInit {
     );
   }
 
+
+
   pin() {
     this.note.pinned = !this.note.pinned;
     this.noteService.saveNote(this.note);

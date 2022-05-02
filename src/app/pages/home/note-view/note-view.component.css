@@ -1,26 +1,29 @@
 .note-editor {
   display: flex;
   flex-direction: column;
-  border: 2px solid var(--border-color);
   height: calc(93vh - 20px);
   position: relative;
   padding: 2rem 2rem 1rem;
   margin: 0.8rem;
   border-radius: 28px;
+  outline : 2px solid var(--border-color);
   background-color: var(--offwhite-color);
 }
 #title {
-  margin-top: 20px;
-  height: 40px;
-  padding: 20px;
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+  height: 50px;
+  padding: 0 20px;
   border: none;
   font-size: 1.3rem;
   border-radius: 10px;
+  font-weight: normal;
   /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.11), 0 3px 8px rgba(0, 0, 0, 0.13); */
 }
 #body {
   margin-top: 20px;
-  height: 100%;
+  height: 90%;
   padding: 10px 20px !important;
   border: none;
   border-radius: 10px;
@@ -106,3 +109,11 @@ mat-icon {
     height: 45px;
   }
 }
+@media screen and (max-height: 768px) {
+  .note-editor {
+    height: 88vh;
+    overflow-x: hidden;
+    margin: 10px;
+  }
+}
+
