@@ -47,18 +47,18 @@ export class ElectronService {
   }
   close(){
     if(this.isElectron) {
-      this.ipcRenderer.sendSync('close-window')
+      this.ipcRenderer.send('close-window')
     }
   }
   minimise(){
     if(this.isElectron) {
 
-      this.ipcRenderer.sendSync('minimize-window')
+      this.ipcRenderer.send('minimize-window')
     }
   }
   maximise(){
     if(this.isElectron) {
-      this.ipcRenderer.sendSync('maximize-window')
+      this.ipcRenderer.send('maximize-window')
     }
   }
 }

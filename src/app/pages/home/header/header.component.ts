@@ -8,7 +8,6 @@ import {UiService} from "../../../services/ui.service";
 })
 export class HeaderComponent implements OnInit {
   navOpen!: boolean;
-  isElectron:boolean = this.uiService.isElectron();
   constructor(private uiService : UiService) {
     this.uiService.navStatus.subscribe(b => this.navOpen = b)
   }
@@ -19,14 +18,5 @@ export class HeaderComponent implements OnInit {
 
   toggleNav(){
     this.uiService.navOpen.next(!this.navOpen);
-  }
-  close(){
-    this.uiService.close();
-  }
-  minimise(){
-    this.uiService.minimise();
-  }
-  maximise(){
-    this.uiService.maximise();
   }
 }

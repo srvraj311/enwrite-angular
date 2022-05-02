@@ -48,6 +48,7 @@ import {
   AngularFireUploadTask,
 } from '@angular/fire/compat/storage';
 import { SearchbarComponent } from './pages/home/searchbar/searchbar.component';
+import { TitlebarComponent } from './pages/titlebar/titlebar.component';
 
 const routes: Routes = [
   { path: '', component: SplashScreenComponent },
@@ -71,6 +72,7 @@ const routes: Routes = [
     ToolbarComponent,
     ChipbarComponent,
     SearchbarComponent,
+    TitlebarComponent,
   ],
   imports: [
     MaterialModule,

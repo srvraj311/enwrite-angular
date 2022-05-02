@@ -15,8 +15,8 @@ function createWindow() {
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
   // Create the browser window.
   win = new electron_1.BrowserWindow({
-    x: 0,
-    y: 0,
+    x: 550,
+    y: 768,
     minWidth: 550  ,
     minHeight: 768,
     width: size.width,
@@ -85,11 +85,11 @@ try {
     win.minimize();
   })
   ipcMain.on('maximize-window', () => {
-    if (win.isMaximized()) {
-      console.log('Window is Maximized')
+    if (!win.isMaximized()) {
+      win.maximize()
     } else {
       console.log('Window is not Maximized')
-      win.maximize();
+      win.unmaximize();
     }
   })
 
