@@ -34,6 +34,14 @@
 }
 .last_opened {
   vertical-align: middle;
+  color: grey;
+}
+.last_opened mat-icon{
+  font-size: 1rem;
+  color: grey;
+  vertical-align: middle;
+  padding-top: 5px;
+  padding-right: 4px;
 }
 .note-view-bottom-options {
   display: flex;
@@ -55,8 +63,11 @@ mat-icon {
   vertical-align: middle;
   color: white;
 }
-.save , .clear{
+.save {
   background-color: var(--accent);
+}
+.clear {
+  background-color: grey;
 }
 .save:hover {
   background-color: var(--accent-hover);
@@ -71,6 +82,12 @@ mat-icon {
 }
 .colorpicker {
   margin: 20px;
+}
+.btn {
+  background-color: var(--accent);
+}
+.btn:hover {
+  background-color: var(--accent-hover)
 }
 
 .fab {

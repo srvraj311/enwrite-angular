@@ -42,6 +42,10 @@
   flex-direction: row;
   margin: 20px 12px 10px;
 }
+.signup{
+  width: 120px;
+  text-align: center;
+}
 .btn:hover {
   background-color: var(--accent-hover) !important;
   color: white;

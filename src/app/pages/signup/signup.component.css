@@ -51,6 +51,9 @@
 input[type="file"] {
   display: none;
 }
+.login-btn {
+  width: 120px;
+}
 .upload {
   border: 1px solid #ccc;
   display: inline-block;

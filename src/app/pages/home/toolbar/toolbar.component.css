@@ -3,11 +3,13 @@
   display: flex;
   align-items: center;
 }
+
 .profile img {
   height: 121px;
+  clip-path: circle();
   border: 2px solid white;
-  border-radius: 50%;
 }
+
 .profile_details {
   position: relative;
   display: block;
@@ -31,9 +33,10 @@
   align-items: center;
   margin-top: 0.7rem;
 }
+
 .toolbar button {
   border: none;
-  background: linear-gradient(var(--accent) , var(--accent-secondary));
+  background: linear-gradient(var(--accent), var(--accent-secondary));
   box-shadow: var(--shadow-wide);
   color: white;
   height: 40px;
@@ -41,28 +44,35 @@
   border-radius: 14px;
   margin-right: 2rem;
 }
+
 .toolbar button:hover {
   cursor: pointer;
 }
-mat-icon{
+
+mat-icon {
   vertical-align: middle;
 }
+
 .name {
   font-size: 1.2rem;
 }
+
 .email {
   font-size: 0.7rem;
 }
-.verified img{
-  height :20px;
-  float : left;
+
+.verified img {
+  height: 20px;
+  float: left;
 }
-.verified{
+
+.verified {
   height: 20px;
   text-align: center;
   display: flex;
 
 }
+
 .verified p {
   font-size: 0.6rem;
   height: 20px;
@@ -74,10 +84,12 @@ mat-icon{
   .toolbar button {
     margin-right: 0.6rem;
   }
+
   .profile {
     padding: 10px 0;
   }
 }
+
 @media screen and (max-width: 380px) {
   .toolbar button {
     margin-right: 0.2rem;

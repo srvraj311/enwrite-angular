@@ -1,16 +1,19 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import Note from '../models/Note';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { UserService } from './user.service';
-import { Router } from '@angular/router';
-import { v4 as uuidv4 } from 'uuid';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {UserService} from './user.service';
+import {Router} from '@angular/router';
+import {v4 as uuidv4} from 'uuid';
+import {ref} from "@angular/fire/storage";
+
 
 const CONSTANT_NOTES_REF: string = 'note';
 const CONSTANT_USER_RED: string = 'users';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -29,18 +32,56 @@ export class NotesService {
     private firestore: AngularFirestore,
     private userService: UserService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   setNoteFilter(s: string) {
     this.notesFilter.next(s);
   }
+
   updateSelectedNote(note: Note) {
     this.selectedNote.next(note);
   }
+
+  clearSelectedNote() {
+    this.updateSelectedNote(new Note(
+      'empty',
+      '',
+      '',
+      '',
+      '#FFFFFF',
+      false
+    ));
+  }
+
+  searchNotes(searchText: string) {
+    this.userService.isUserLoggedIn().subscribe((user) => {
+      if (user !== null) {
+        const email = user.email;
+        const userRef: AngularFirestoreDocument<any> = this.firestore.doc(
+          `users/${email}`
+        );
+        userRef
+          .collection(CONSTANT_NOTES_REF)
+          .valueChanges().subscribe(n => {
+            n = n as Note[]
+            let filteredNote:Note[] = [];
+            for(let note of n){
+              if(note['note_title'].toLowerCase().includes(searchText.toLowerCase()) || note['note_body'].toLowerCase().includes(searchText.toLowerCase())){
+                filteredNote.push(note as Note);
+              }
+            }
+          this.updateNotesObservable(filteredNote);
+        })
+      }
+    });
+  }
+
   // Update the notes Observable to contain the latest changes
   updateNotesObservable(notes: Note[]) {
     this.notesArr.next(notes);
   }
+
   // get notes from firebase
   async getNotes(): Promise<void> {
     this.userService.isUserLoggedIn().subscribe((user) => {
@@ -59,8 +100,8 @@ export class NotesService {
       console.log('Notes Refreshed');
     });
   }
+
   saveNote(note: Note) {
-    console.log(note);
     this.userService.isUserLoggedIn().subscribe((user) => {
       if (user !== null) {
         const email = user.email;
@@ -74,10 +115,11 @@ export class NotesService {
         userRef
           .collection(CONSTANT_NOTES_REF)
           .doc(note.note_id)
-          .set(Object.assign({}, note));
+          .set(Object.assign({}, note)).then(r => console.log('Note Saved'));
       }
     });
   }
+
 
   convertTimestampToMinutesAgo(time: number) {
     switch (typeof time) {
@@ -89,7 +131,7 @@ export class NotesService {
       default:
         time = +new Date();
     }
-    var time_formats = [
+    const time_formats = [
       [60, 'seconds', 1], // 60
       [120, '1 minute ago', '1 minute from now'], // 60*2
       [3600, 'minutes', 60], // 60*60, 60
@@ -106,7 +148,7 @@ export class NotesService {
       [5806080000, 'Last century', 'Next century'], // 60*60*24*7*4*12*100*2
       [58060800000, 'centuries', 2903040000], // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
     ];
-    var seconds = (+new Date() - time) / 1000,
+    let seconds = (+new Date() - time) / 1000,
       token = 'ago',
       list_choice = 1;
 
@@ -118,7 +160,7 @@ export class NotesService {
       token = 'from now';
       list_choice = 2;
     }
-    var i = 0,
+    let i = 0,
       format;
     while ((format = time_formats[i++]))
       if (seconds < format[0]) {
@@ -133,7 +175,7 @@ export class NotesService {
 
   filterNotes(sortBy: string) {
     this.notesObservable.subscribe((n) => {
-      var n = n as Note[];
+      n = n as Note[];
       if (sortBy === 'time') {
         n = n.sort((a, b) => {
           return Number(b.note_date) - Number(a.note_date);
@@ -152,5 +194,21 @@ export class NotesService {
         });
       }
     });
+  }
+
+  async deleteNote(note: Note) {
+    this.userService.isUserLoggedIn().subscribe((user) => {
+      if (user !== null) {
+        const email = user.email;
+        const userRef: AngularFirestoreDocument<any> = this.firestore.doc(
+          `users/${email}`
+        );
+        userRef
+          .collection(CONSTANT_NOTES_REF)
+          .doc(note.note_id)
+          .delete();
+      }
+    });
+    this.clearSelectedNote();
   }
 }

@@ -1,6 +1,7 @@
 .noteTitle {
   font-size: 1.1rem;
   font-weight: 500;
+  flex: 1;
 }
 .noteBody {
   margin-top: 0.8rem;
@@ -10,6 +11,7 @@
 .noteDate {
   font-size: 0.7rem;
   text-align: end;
+  color: grey;
 }
 .note {
   max-width: 90%;
@@ -24,17 +26,22 @@
 .note:hover {
   cursor: pointer;
 }
-.noteDate{
-  color: grey;
-}
-mat-icon{
+
+.noteDate mat-icon{
   font-size: 14px;
   color: grey;
   vertical-align: middle;
   padding-top: 5px;
   padding-right: 4px;
 }
-
+.top-options {
+  display: flex;
+}
+.top-options mat-icon {
+  font-size: 1.4rem;
+  margin-right: -16px;
+  margin-top: -5px;
+}
 @media screen and (max-width: 550px) {
   .note{
     max-width: 95%;

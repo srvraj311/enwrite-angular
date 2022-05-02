@@ -3,7 +3,25 @@
   [ngStyle]="{ borderLeft : '20px solid ' + note.note_colour ,
    outline : note === selectedNote ? '1px solid var(--accent)' : '1px solid var(--light-gray)'}"
 >
-  <div class="noteTitle">{{ note.note_title }}</div>
+
+  <div class="top-options">
+    <div class="noteTitle">{{
+      note.note_title.length > 20
+        ? note.note_title.substring(0, 20) + "...."
+        : note.note_title
+      }}</div>
+    <mat-icon [matMenuTriggerFor]="menu" #menuTrigger >more_vert</mat-icon>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="pin()">
+        <mat-icon>{{this.note.pinned ? 'favorite' : 'favorite_border'}}</mat-icon>
+        <span>{{this.note.pinned ? 'Remove Favourite' : 'Favourite'}}</span>
+      </button>
+      <button mat-menu-item (click)="delete()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+  </div>
   <div class="noteBody">
     {{
       note.note_body.length > 200

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import {Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import Note from 'src/app/models/Note';
 import { NotesService } from 'src/app/services/notes.service';
 import {UiService} from "../../../services/ui.service";
@@ -13,6 +13,7 @@ export class NoteViewComponent implements OnInit {
   time!: string;
   title!: string;
   body!: string;
+  @ViewChild('#bodyInput') bodyElement:ElementRef = new ElementRef<any>('textarea');
   colorArray: string[] = [
     '#FFFFFF',
     '#ACACAC',
@@ -36,10 +37,12 @@ export class NoteViewComponent implements OnInit {
       this.selectedColor = n.note_colour;
     });
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
   saveNote() {
-    var date: string = String(+new Date());
-    var note: Note = new Note(
+    const date: string = String(+new Date());
+    const note: Note = new Note(
       this.selectedNote.note_id,
       this.title,
       this.body,
@@ -59,6 +62,7 @@ export class NoteViewComponent implements OnInit {
       );
     }
   }
+
   addNewNote() {
     const date: string = String(+Date.now());
     const tempNote: Note = new Note(

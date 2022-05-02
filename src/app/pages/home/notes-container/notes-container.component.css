@@ -7,7 +7,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  transition: position 0.3s ease-in;
+  transition: all 0.2s ease-in-out;
 }
 .notes-container {
   border: 2px solid var(--border-color);
@@ -15,8 +15,8 @@
   max-width: 500px;
   min-width: 500px;
   overflow-y: scroll;
-  transition: all 0.2s ease-in;
-  transition-delay: 0s;
+  transition: all 0.2s ease-out;
+  /*transition-delay: 0s;*/
   padding: 2rem 2rem 1rem;
   margin: 0.8rem;
   border-radius: 28px;

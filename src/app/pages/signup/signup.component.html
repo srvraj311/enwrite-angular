@@ -116,27 +116,37 @@
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
     </mat-form-field>
-
+    <mat-spinner
+      *ngIf="spinnerVisible"
+      class="spinner-small"
+      mode="indeterminate"
+      value="50"
+      strokeWidth="3"
+      diameter="60"
+      color="accent"
+    ></mat-spinner>
     <div class="btn-login">
       <button
         *ngIf="!signedUp"
         mat-raised-button
+        (click)="login(f)"
         [ngStyle]="{ 'margin-right': '10px' }"
+        class="btn btn-block login-btn"
+        color="accent"
+      >
+        Log-In
+      </button>
+      <button
+        *ngIf="!signedUp"
+        mat-raised-button
+
         color="accent"
         (click)="signup(f)"
         class="btn btn-block"
       >
         Sign-Up
       </button>
-      <button
-        *ngIf="!signedUp"
-        mat-raised-button
-        (click)="login(f)"
-        class="btn btn-block"
-        color="accent"
-      >
-        Log-In
-      </button>
+
       <button
         *ngIf="signedUp"
         mat-raised-button

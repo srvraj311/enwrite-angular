@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
+import {NotesService} from "../../../services/notes.service";
 
 @Component({
   selector: 'app-searchbar',
@@ -8,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class SearchbarComponent implements OnInit {
   searchText: string = "";
 
-  constructor() { }
+  constructor(private notesService : NotesService) { }
 
   ngOnInit(): void {
-    console.log(this.searchText)
+    this.notesService.searchNotes(this.searchText);
   }
 
+  search(){
+    this.notesService.searchNotes(this.searchText);
+  }
 }

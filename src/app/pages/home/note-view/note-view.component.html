@@ -15,6 +15,7 @@
     [ngStyle]="{ background: selectedColor }"
   />
   <textarea
+    #bodyInput
     [ngStyle]="{ background: selectedColor }"
     [(ngModel)]="body"
     name="body"
@@ -22,10 +23,10 @@
     id="body"
   ></textarea>
   <div class="note-view-bottom-options">
-    <p class="last_opened">{{ time }}</p>
+    <div class="last_opened"><mat-icon>access_time</mat-icon>{{ time }}</div>
     <div>
       <button class="bt save" (click)="saveNote()"><mat-icon>done</mat-icon></button>
-      <button class="bt clear" (click)="clearInput()" ><mat-icon>clear</mat-icon></button>
+      <button class="bt clear" (click)="clearInput()" ><mat-icon>backspace</mat-icon></button>
     </div>
   </div>
   <div class="colorpicker">
@@ -44,7 +45,6 @@
     <img src="/assets/pictures/empty.jpeg" alt="Empty Element">
     <br>
     <p> Start by Creating a new note or Select an Existing Note </p>
-    <button class="btn btn-primary" (click)="addNewNote()">Create New</button>
-    <button class="btn btn-primary" (click)="toggleNav()">View Notes</button>
+    <button class="btn btn-primary" (click)="addNewNote()"><mat-icon style="margin-right: 5px">add</mat-icon>Create New</button>
   </div>
 </ng-template>

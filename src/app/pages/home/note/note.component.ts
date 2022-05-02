@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import Note from 'src/app/models/Note';
-import { NotesService } from 'src/app/services/notes.service';
+import {NotesService} from 'src/app/services/notes.service';
 
 @Component({
   selector: 'app-note',
@@ -11,7 +11,10 @@ export class NoteComponent implements OnInit {
   @Input() note!: Note;
   time: string = '';
   selectedNote!: Note;
-  constructor(private noteService: NotesService) {}
+
+  constructor(private noteService: NotesService) {
+  }
+
   ngOnInit(): void {
     this.time = this.noteService
       .convertTimestampToMinutesAgo(Number(this.note.note_date))
@@ -19,5 +22,15 @@ export class NoteComponent implements OnInit {
     this.noteService.selectedNoteObservable.subscribe(
       (x) => (this.selectedNote = x)
     );
+  }
+
+  pin() {
+    this.note.pinned = !this.note.pinned;
+    this.noteService.saveNote(this.note);
+  }
+
+  delete() {
+    this.noteService.deleteNote(this.note).then(r => //TODO  : ADD Delete Note Toast
+      console.log(r));
   }
 }

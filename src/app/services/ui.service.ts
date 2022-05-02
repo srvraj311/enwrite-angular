@@ -5,7 +5,7 @@ import {BehaviorSubject} from "rxjs";
   providedIn: 'root'
 })
 export class UiService {
-  navOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  navOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   navStatus = this.navOpen.asObservable();
   constructor() { }
 }
