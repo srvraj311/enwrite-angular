@@ -11,7 +11,6 @@ export class NoteComponent implements OnInit {
   @Input() note!: Note;
   time: string = '';
   selectedNote!: Note;
-
   constructor(private noteService: NotesService) {
   }
 

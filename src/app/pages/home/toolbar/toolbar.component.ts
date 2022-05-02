@@ -5,6 +5,7 @@ import { NotesService } from 'src/app/services/notes.service';
 import { UserService } from 'src/app/services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
+import {UiService} from "../../../services/ui.service";
 
 @Component({
   selector: 'app-toolbar',
@@ -18,7 +19,8 @@ export class ToolbarComponent implements OnInit {
   isEmailVerified : boolean = true;
   constructor(
     private notesService: NotesService,
-    private userService: UserService
+    private userService: UserService,
+    private uiService : UiService
   ) {
     this.userService.isUserLoggedIn().subscribe((user) => {
       this.name = user?.displayName as string;
@@ -45,6 +47,9 @@ export class ToolbarComponent implements OnInit {
       '#FFFFFF',
       false
     );
+    if(this.uiService.isMobile){
+      this.uiService.navOpen.next(!this.uiService.navOpen.value);
+    }
     this.notesService.updateSelectedNote(tempNote);
   }
    logout() {
