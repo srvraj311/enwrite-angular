@@ -39,7 +39,6 @@ function createWindow() {
   } else {
     // Path when running electron executable
     let pathIndex = '/dist/en-write-angular/index.html';
-
     win.loadURL('file://' + __dirname + pathIndex)
       .then(_ => console.log(path.join(__dirname, pathIndex)))
       .catch(e => console.log(e))

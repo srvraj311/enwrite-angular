@@ -31,7 +31,7 @@ export class NoteComponent implements OnInit {
   }
 
   delete() {
-    this.noteService.deleteNote(this.note).then(r => //TODO  : ADD Delete Note Toast
+    this.noteService.deleteNote(this.note).then(r =>
       console.log(r));
   }
 }

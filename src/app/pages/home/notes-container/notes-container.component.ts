@@ -46,8 +46,7 @@ export class NotesContainerComponent implements OnInit {
   }
 
   selectNote(n: Note): void {
-    var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-    console.log(width)
+    const width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     if(this.uiService.isMobile || width < 560){
       this.uiService.navOpen.next(!this.uiService.navOpen.value);
     }

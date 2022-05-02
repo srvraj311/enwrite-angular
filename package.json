@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "electron:local": "electron .",
+    "electron:local": "sudo ng build --base-href='./'  && sudo electron .",
     "electron:serve": "wait-on tcp:4200 && electron . --serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

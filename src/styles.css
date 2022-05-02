@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: brand;
-  src: url("/src/assets/fonts/Vonique64.ttf");
+  src: url("./assets/fonts/Vonique64.ttf");
 }
 
 :root {

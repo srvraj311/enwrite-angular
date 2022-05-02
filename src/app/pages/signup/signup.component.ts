@@ -16,7 +16,7 @@ export class SignupComponent implements OnInit {
   selectedFile!: File;
   spinnerVisible: boolean = false;
   hide = true;
-  downloadUrl:string = '/assets/pictures/user.png';
+  downloadUrl:string = 'assets/pictures/user.png';
   signedUp:boolean = false;
   isEmailVerified:boolean = true;
   email = new FormControl('', [Validators.required, Validators.email]);
