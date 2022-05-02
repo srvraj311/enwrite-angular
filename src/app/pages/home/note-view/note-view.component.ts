@@ -17,7 +17,7 @@ import {UiService} from "../../../services/ui.service";
   templateUrl: './note-view.component.html',
   styleUrls: ['./note-view.component.css'],
 })
-export class NoteViewComponent implements OnInit, OnDestroy, OnChanges {
+export class NoteViewComponent implements OnInit {
   selectedNote!: Note;
   time!: string;
   title!: string;
@@ -104,14 +104,5 @@ export class NoteViewComponent implements OnInit, OnDestroy, OnChanges {
   clearInput() {
     this.title = ""
     this.body = ""
-  }
-
-  ngOnDestroy(): void {
-    this.saveNote();
-  }
-
-  ngOnChanges(changes:SimpleChanges): void {
-    console.log(changes);
-    setTimeout(this.bodyElement.nativeElement.focus(), 0);
   }
 }

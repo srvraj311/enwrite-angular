@@ -20,6 +20,24 @@
   height: 60px;
   margin-left: 10px;
 }
+.head{
+  padding: 10px;
+  float: right !important;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.close {
+  background: linear-gradient(#c10855 , #b6359c);
+}
+.max {
+  background: linear-gradient(darkgreen , forestgreen);
+}
+.min {
+  background: linear-gradient(coral , orange);
+}
+
+
 img {
   margin-left: 0.5rem;
   margin-top: 0.7rem;

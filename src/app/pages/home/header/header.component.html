@@ -7,7 +7,9 @@
     src="/assets/icons/png/main.png"
   />
   <p class="title">enWrite</p>
-
+  <div *ngIf="isElectron" class="head close" (click)="close()"></div>
+  <div *ngIf="isElectron" class="head min" (click)="minimise()"></div>
+<!--  <div class="head max" (click)="maximise()"></div>-->
 </header>
 
 

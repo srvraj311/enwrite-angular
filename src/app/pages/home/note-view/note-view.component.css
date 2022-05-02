@@ -115,7 +115,7 @@ mat-icon {
   }
 
 }
-@media screen and (max-height: 768px) {
+@media screen and (max-height: 767px) {
   .note-editor {
     height: 88vh;
     overflow-x: hidden;

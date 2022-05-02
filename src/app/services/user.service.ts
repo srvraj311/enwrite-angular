@@ -98,10 +98,11 @@ export class UserService {
 
   async logoutUser() {
     return this.authService.signOut().then(() => {
-        this.router.navigate(['/login']);
-        console.log('Logout Complete');
-        localStorage.clear();
-        sessionStorage.clear();
+      console.log('Logout Complete');
+      localStorage.clear();
+      sessionStorage.clear();
+      this.router.navigate(['/login']);
+      this.authService.signOut();
     }).catch((err) => {
       console.log(err)
     })

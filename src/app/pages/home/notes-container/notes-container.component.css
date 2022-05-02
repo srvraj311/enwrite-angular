@@ -36,7 +36,7 @@
   }
 }
 
-@media screen and (max-height: 768px) {
+@media screen and (max-height: 767px) {
   .notes-container {
     height: 88vh;
     overflow-x: hidden;
