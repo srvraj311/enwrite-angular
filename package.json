@@ -5,7 +5,8 @@
   "build": {
     "appId": "com.srvraj311.enWrite",
     "mac": {
-      "category": "utility.personal"
+      "category": "utility",
+      "icon": "dist/ic_launcher_round.icns"
     }
   },
   "scripts": {
