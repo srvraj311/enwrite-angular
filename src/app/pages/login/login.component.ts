@@ -90,6 +90,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  googleSignIn(){
+      this.userService.googleAuth().then(r => 'Google Auth : Login Component');
+  }
+
   signup(form: NgForm): void {
     this.router.navigate(['/signup']).then(r => console.log('Signup Page Loaded'))
   }

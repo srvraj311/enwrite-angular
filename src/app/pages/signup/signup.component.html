@@ -125,10 +125,15 @@
       diameter="60"
       color="accent"
     ></mat-spinner>
+    <div class="btn-google">
+      <button class="google" mat-stroked-button (click)="googleSignIn()" >
+        <img src="assets/icons/png/google.png" alt=""/>Sign In
+      </button>
+    </div>
     <div class="btn-login">
       <button
         *ngIf="!signedUp"
-        mat-raised-button
+        mat-stroked-button
         (click)="login(f)"
         [ngStyle]="{ 'margin-right': '10px' }"
         class="btn btn-block login-btn"

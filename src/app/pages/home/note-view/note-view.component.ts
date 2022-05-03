@@ -17,7 +17,7 @@ import {UiService} from "../../../services/ui.service";
   templateUrl: './note-view.component.html',
   styleUrls: ['./note-view.component.css'],
 })
-export class NoteViewComponent implements OnInit {
+export class NoteViewComponent implements OnInit, OnDestroy {
   selectedNote!: Note;
   time!: string;
   title!: string;
@@ -54,14 +54,14 @@ export class NoteViewComponent implements OnInit {
 
   clearSelectedNoteScreen() {
     if (this.selectedNote.note_id == 'new') {
-      this.selectedNote = new Note(
-        'empty',
+      const note = new Note('empty',
         '',
         '',
         '',
         this.selectedColor,
-        false
-      );
+        false)
+      this.selectedNote = note;
+      this.notesService.updateSelectedNote(note);
     }
   }
 
@@ -104,5 +104,8 @@ export class NoteViewComponent implements OnInit {
   clearInput() {
     this.title = ""
     this.body = ""
+  }
+  ngOnDestroy() {
+    this.clearSelectedNoteScreen();
   }
 }

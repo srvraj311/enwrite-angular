@@ -39,15 +39,37 @@
   justify-content: space-evenly;
   display: flex;
   flex-direction: row;
-  margin: 20px 12px 10px;
+  margin: 8px 12px 10px;
 }
 .signup{
   width: 120px;
   text-align: center;
+  background: var(--offwhite-color);
+  color: var(--accent);
 }
 .btn:hover {
   background-color: var(--accent-hover) !important;
   color: white;
+}
+.signup:hover{
+  background-color: var(--light-gray) !important;
+  color: black;
+}
+.btn-google{
+  width: 80%;
+  max-width: 300px;
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  margin: 8px 12px 10px;
+}
+.google{
+  width: 100%;
+}
+
+.google img {
+  height: 20px;
+  margin-right: 10px;
 }
 .spinner-small{
   margin: 10px;

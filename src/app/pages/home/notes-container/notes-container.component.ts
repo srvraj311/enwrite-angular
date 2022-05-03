@@ -18,9 +18,11 @@ export class NotesContainerComponent implements OnInit {
   navOpen!: boolean;
   constructor(private noteService: NotesService, private uiService : UiService) {
     this.uiService.navStatus.subscribe(b => this.navOpen = b)
+    this.noteService.updateNotesObservable([]);
   }
 
   ngOnInit(): void {
+
     this.noteService.getNotes().then(r => console.log('Notes Fetched'));
     this.noteService.selectedNoteObservable.subscribe((n) => {
       this.selectedNote = n;

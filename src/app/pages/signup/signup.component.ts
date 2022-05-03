@@ -105,4 +105,7 @@ export class SignupComponent implements OnInit {
         });
     })
   }
+  googleSignIn(){
+    this.userService.googleAuth().then( (r) => 'Google Auth : Login Component')
+  }
 }

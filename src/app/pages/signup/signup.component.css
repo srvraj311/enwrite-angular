@@ -34,14 +34,13 @@
   background-color: #ffffff;
 }
 .btn-login {
-  margin: 12px;
-  margin-top: 20px;
   width: 80%;
   max-width: 300px;
   justify-content: space-evenly;
   display: flex;
   flex-direction: row;
-  margin-bottom: 10px;
+  margin: 8px 12px 10px;
+
 }
 .btn:hover {
   background-color: var(--accent-hover) !important;
@@ -52,6 +51,12 @@ input[type="file"] {
 }
 .login-btn {
   width: 120px;
+  background: var(--offwhite-color);
+  color: var(--accent);
+}
+.login-btn:hover {
+  background-color: var(--light-gray) !important;
+  color: black;
 }
 .upload {
   border: 1px solid #ccc;
@@ -59,4 +64,20 @@ input[type="file"] {
   padding: 0.2rem 1rem;
   cursor: pointer;
   margin: 10px;
+}
+.btn-google{
+  width: 80%;
+  max-width: 300px;
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  margin: 8px 12px 10px;
+}
+.google{
+  width: 100%;
+}
+
+.google img {
+  height: 20px;
+  margin-right: 10px;
 }

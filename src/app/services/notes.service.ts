@@ -4,7 +4,7 @@ import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, map, Observable} from 'rxjs';
 import {UserService} from './user.service';
 import {Router} from '@angular/router';
 import {v4 as uuidv4} from 'uuid';
@@ -86,7 +86,7 @@ export class NotesService {
 
   // get notes from firebase
   async getNotes(): Promise<void> {
-    this.userService.isUserLoggedIn().subscribe((user) => {
+    this.userService.isUserLoggedIn().pipe(map(user => {
       if (user !== null) {
         const email = user.email;
         const userRef: AngularFirestoreDocument<any> = this.firestore.doc(
@@ -98,9 +98,13 @@ export class NotesService {
           .subscribe((notes) => {
             this.updateNotesObservable(<Note[]>notes);
           });
+        console.log('Notes Refreshed');
+        return Promise.resolve();
+      }else{
+        console.log('User Logged Out')
+        return Promise.reject();
       }
-      console.log('Notes Refreshed');
-    });
+    }));
   }
 
   saveNote(note: Note) {

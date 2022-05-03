@@ -5,13 +5,18 @@
   "build": {
     "appId": "com.srvraj311.enWrite",
     "productName": "enWrite",
-    "target": "dmg",
+    "target": "win",
+    "nsis" : {
+      "oneClick" : "true",
+      "runAfterFinish" : true,
+      "createDesktopShortcut" : true
+    },
     "mac": {
       "category": "utility",
       "icon": "dist/ic_launcher_round.icns"
     },
     "files": [
-      "dist/en-write-anhular",
+      "dist/en-write-angular/",
       "package.json",
       "app.js"
     ]

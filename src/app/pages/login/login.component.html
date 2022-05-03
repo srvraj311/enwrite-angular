@@ -1,7 +1,7 @@
 <div class="login-feilds-container" style="background: url('assets/pictures/gradient_bg.jpg')"></div>
 
 <div class="center-container">
-  <form #f="ngForm" (ngSubmit)="login(f)" class="login-form">
+  <form #f="ngForm" class="login-form">
     <img
       class="img-small login-img"
       alt="enWrite-icon"
@@ -67,9 +67,14 @@
       diameter="60"
       color="accent"
     ></mat-spinner>
+    <div class="btn-google">
+      <button class="google" mat-stroked-button (click)="googleSignIn()" >
+        <img src="assets/icons/png/google.png" alt=""/>Sign In
+      </button>
+    </div>
     <div class="btn-login">
       <button
-        mat-raised-button
+        mat-stroked-button
         [ngStyle]="{ 'margin-right': '10px' }"
         color="accent"
         (click)="signup(f)"
