@@ -16,12 +16,15 @@ enWrite is an simple and clean web app for taking notes on the go that syncs acr
 - Used MVC architechure
 - Intuitive User Interface using Material Design
 - Realtime Data updation using angular firestore
+- Electron JS (Cross Platfor Native Support)
+
 
 ## Languages and Libraries used:
 
 - Angular v13
 - Firebase (AngularFIre2 connector)
 - Angular Material
+- Electron 18
 
 Use of third party libraries are kept minimal to explore the indepth features of the frameworks itself.
 
@@ -34,6 +37,20 @@ Install the dependencies and devDependencies and start the server for angular ap
 $ cd enwrite-angular
 $ npm install
 $ ng serve --o
+```
+For electron environment : Dev
+
+```sh
+$ cd enwrite-angular
+$ ng serve
+$ npm run electron:serve
+```
+For Electron : Prod
+
+```sh
+$ cd enwrite-angular
+$ ng serve
+$ npm run electron:local
 ```
 
 ### Screenshots
