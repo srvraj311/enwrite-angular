@@ -55,8 +55,7 @@ $ npm run electron:local
 
 ### Screenshots
 
-![image](https://res.cloudinary.com/srvraj311/image/upload/v1649557495/Screenshot_2022-04-10_at_7.53.09_AM_hncqdj.png)
-![image](https://res.cloudinary.com/srvraj311/image/upload/v1649557497/Screenshot_2022-04-10_at_7.51.48_AM_oc2slg.png)
-![image](https://res.cloudinary.com/srvraj311/image/upload/v1649557496/Screenshot_2022-04-10_at_7.52.43_AM_gony1b.png)
-![image](https://res.cloudinary.com/srvraj311/image/upload/v1649557496/Screenshot_2022-04-10_at_7.52.33_AM_utemtp.png)
-![image](https://res.cloudinary.com/srvraj311/image/upload/v1649557495/Screenshot_2022-04-10_at_7.52.22_AM_jeyala.png)
+![image](https://res.cloudinary.com/srvraj311/image/upload/v1651576417/Screenshot_2022-05-03_at_4.41.12_PM_t4lf8o.png)
+![image](https://res.cloudinary.com/srvraj311/image/upload/v1651576414/Screenshot_2022-05-03_at_4.41.21_PM_jge05k.png)
+![image](https://res.cloudinary.com/srvraj311/image/upload/v1651576416/Screenshot_2022-05-03_at_4.30.06_PM_lsb3oh.png)
+![image](https://res.cloudinary.com/srvraj311/image/upload/v1651576406/Screenshot_2022-05-03_at_4.42.00_PM_vx2op9.png)
