@@ -22,9 +22,9 @@ function createWindow() {
     width: size.width,
     height: size.height,
     frame: false,
-    icon : 'src/assets/icons/ic_launcher_round.png',
+    icon : 'dist/ic_launcher_round.png',
     webPreferences: {
-      devTools: false,
+      devTools: true,
       webSecurity: false,
       nodeIntegration: true,
       allowRunningInsecureContent: (serve),
