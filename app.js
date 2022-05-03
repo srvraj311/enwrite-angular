@@ -22,8 +22,9 @@ function createWindow() {
     width: size.width,
     height: size.height,
     frame: false,
+    icon : 'src/assets/icons/ic_launcher_round.png',
     webPreferences: {
-      devTools: true,
+      devTools: false,
       webSecurity: false,
       nodeIntegration: true,
       allowRunningInsecureContent: (serve),
@@ -38,6 +39,7 @@ function createWindow() {
     win.loadURL('http://localhost:4200').then(r => console.log('Loaded Localhost'));
   } else {
     // Path when running electron executable
+    win.setMenu(null)
     let pathIndex = '/dist/en-write-angular/index.html';
     win.loadURL('file://' + __dirname + pathIndex)
       .then(_ => console.log(path.join(__dirname, pathIndex)))

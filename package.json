@@ -2,7 +2,16 @@
   "name": "en-write-angular",
   "version": "0.1.0",
   "main": "app.js",
+  "build": {
+    "appId": "com.srvraj311.enWrite",
+    "mac": {
+      "category": "utility.personal"
+    }
+  },
   "scripts": {
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps",
     "ng": "ng",
     "start": "ng serve",
     "electron:local": "sudo ng build --base-href='./'  && sudo electron .",
@@ -61,7 +70,10 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.5.2"
+    "typescript": "~4.5.2",
+    "electron-builder": "^23.0.3"
   },
-  "files": ["!**/dist/*"]
+  "files": [
+    "!**/dist/*"
+  ]
 }
