@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 
 // If you import a module but never use any of the imported values other than as TypeScript types,
 // the resulting javascript file will look as if you never imported the module at all.
-import { ipcRenderer, webFrame , app, BrowserWindow} from 'electron';
+import { ipcRenderer, webFrame , app, BrowserWindow, shell} from 'electron';
 import * as childProcess from 'child_process';
 import * as fs from 'fs';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,9 @@ export class ElectronService {
   childProcess!: typeof childProcess;
   fs!: typeof fs;
   app!: typeof app;
+  shell!: typeof shell;
   browserWindow!: typeof BrowserWindow
-  constructor() {
+  constructor(private userService : UserService) {
     // Conditional imports
     if (this.isElectron) {
       this.ipcRenderer = window.require('electron').ipcRenderer;
@@ -25,7 +27,10 @@ export class ElectronService {
       this.childProcess = window.require('child_process');
       this.fs = window.require('fs');
       this.browserWindow = window.require('electron').BrowserWindow
-
+      
+      this.ipcRenderer.on('auth-token',  (event , token) => {
+          this.userService.signInGoogleWithPopUp(token);
+      })
 
 
       // Notes :
@@ -42,6 +47,10 @@ export class ElectronService {
     }
   }
 
+  static openUrlInBrowser(url:string){
+    window.require('electron').shell.openExternal(url);
+  }
+
   get isElectron(): boolean {
     return !!(window && window.process && window.process.type);
   }
@@ -50,9 +59,9 @@ export class ElectronService {
       this.ipcRenderer.send('close-window')
     }
   }
+
   minimise(){
     if(this.isElectron) {
-
       this.ipcRenderer.send('minimize-window')
     }
   }

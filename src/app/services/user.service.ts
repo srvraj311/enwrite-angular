@@ -13,7 +13,7 @@ import {User} from '../models/User';
 import {CustomMessageDialog} from '../UiComponets/CustomMessageDialog';
 import {FirebaseError} from 'firebase/app';
 import {rejects} from "assert";
-import {signInWithEmailAndPassword} from "@angular/fire/auth";
+import {GoogleAuthProvider, signInWithEmailAndPassword} from "@angular/fire/auth";
 import * as auth from "firebase/auth";
 import {firebaseApp$} from "@angular/fire/app";
 import {NotesService} from "./notes.service";
@@ -82,6 +82,14 @@ export class UserService {
           );
         });
         break;
+        case 'auth/operation-not-supported-in-this-environment':
+          this.ngZone.run(() => {
+            this.openDialog(
+              'Sign-in Method not supported in App',
+              'Try logging in with password on App'
+            );
+          });
+          break;
       default:
         this.ngZone.run(() => {
           this.openDialog(
@@ -121,27 +129,44 @@ export class UserService {
   }
 
   // Auth logic to run auth providers
-  AuthLogin(provider: any) {
+  AuthLogin(provider: any, isApp : boolean) {
     return this.authService
       .signInWithPopup(provider)
-      .then((result) => {
+      .then((result : any) => {
+        if(isApp && window !== undefined){
+          window.location.href = 'enwrite://' + result._tokenResponse.oauthIdToken;
+          return 0;
+        }
         this.SetUserData(result.user).then(r => {
-
+          
         });
+        return result;
       })
       .catch((error) => {
         this.processError(error);
       });
   }
 
-  googleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      if (res) {
-        this.ngZone.run(() => {
-          this.router.navigate(['home']).then(r => console.log('Navigated to Home'));
-        });
-      }
-    });
+  async redirectAuth():Promise<boolean>{
+    const res:any = await this.AuthLogin(new GoogleAuthProvider(), true)
+    return res == 0;
+  }
+  
+  async signInGoogleWithPopUp(token : string){
+    const res:any = await this.AuthLogin(GoogleAuthProvider.credential(token), false);
+    if (res) {
+      this.ngZone.run(() => {
+        this.router.navigate(['home']).then(r => console.log('Navigated to Home'));
+      });
+    }
+  }
+  async googleAuth() {
+    const res:any = await this.AuthLogin(new auth.GoogleAuthProvider(), false);
+    if (res) {
+      this.ngZone.run(() => {
+        this.router.navigate(['home']).then(r => console.log('Navigated to Home'));
+      });
+    }
   }
 
   getCurrentEmail() {

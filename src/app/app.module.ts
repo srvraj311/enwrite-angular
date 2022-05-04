@@ -49,8 +49,10 @@ import {
 } from '@angular/fire/compat/storage';
 import { SearchbarComponent } from './pages/home/searchbar/searchbar.component';
 import { TitlebarComponent } from './pages/titlebar/titlebar.component';
+import { RedirectComponent } from './pages/redirect/redirect.component';
 
 const routes: Routes = [
+  { path: 'redirect', component : RedirectComponent},
   { path: '', component: SplashScreenComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -73,6 +75,7 @@ const routes: Routes = [
     ChipbarComponent,
     SearchbarComponent,
     TitlebarComponent,
+    RedirectComponent,
   ],
   imports: [
     MaterialModule,

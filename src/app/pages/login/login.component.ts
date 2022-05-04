@@ -11,6 +11,8 @@ import {UserService} from 'src/app/services/user.service';
 import {Router} from '@angular/router';
 import LoginReq from '../../models/LoginReq';
 import {MatDialog} from '@angular/material/dialog';
+import { ElectronService } from 'src/app/services/electron.service';
+
 
 @Component({
   selector: 'app-login',
@@ -24,7 +26,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private electron : ElectronService
   ) {
   }
 
@@ -91,6 +94,10 @@ export class LoginComponent implements OnInit {
   }
 
   googleSignIn(){
+    if(this.electron.isElectron){
+      ElectronService.openUrlInBrowser('https://enwrite-8ffba.web.app/redirect');
+      return
+    }
       this.userService.googleAuth().then(r => 'Google Auth : Login Component');
   }
 
