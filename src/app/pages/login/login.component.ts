@@ -95,6 +95,7 @@ export class LoginComponent implements OnInit {
 
   googleSignIn(){
     if(this.electron.isElectron){
+      this.electron.showWaitingMessage();
       ElectronService.openUrlInBrowser('https://enwrite-8ffba.web.app/redirect');
       return
     }

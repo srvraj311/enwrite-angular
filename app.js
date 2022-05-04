@@ -65,11 +65,11 @@ function createWindow(title, content) {
   else {
     app.on("second-instance", (event, argv, _workingDirectory) => {
       if (win) {
-        const depelinkUrl = argv.find((arg) => {
+        const deeplinkUrl = argv.find((arg) => {
           return arg.startsWith("enwrite://");
         });
-        if (depelinkUrl) {
-          const token = depelinkUrl.substring(10).slice(0, -1);
+        if (deeplinkUrl) {
+          const token = deeplinkUrl.substring(10).slice(0, -1);
           win.webContents.send("auth-token", token);
         } else {
           console.log("No url recieved");
