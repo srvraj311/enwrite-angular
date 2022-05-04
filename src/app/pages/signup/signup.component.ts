@@ -6,6 +6,7 @@ import LoginReq from 'src/app/models/LoginReq';
 import { NotesService } from 'src/app/services/notes.service';
 import { UserService } from 'src/app/services/user.service';
 import {Router} from "@angular/router";
+import { ElectronService } from 'src/app/services/electron.service';
 
 @Component({
   selector: 'app-signup',
@@ -27,7 +28,8 @@ export class SignupComponent implements OnInit {
     private userService: UserService,
     private notesService: NotesService,
     private storage: AngularFireStorage,
-    private router : Router
+    private router : Router,
+    private electron : ElectronService
   ) {}
   getErrorMessage(f: FormControl) {
     if (f.hasError('required')) {
@@ -106,6 +108,14 @@ export class SignupComponent implements OnInit {
     })
   }
   googleSignIn(){
+    if(this.electron.isElectron){
+      this.userService.openDialog(
+          'Opening browser for Signing in',
+          'If not opened, go to https://enwrite-8ffba.web.app/redirect'
+      );
+      ElectronService.openUrlInBrowser('http://localhost:4200/redirect');
+      return
+    }
     this.userService.googleAuth().then( (r) => 'Google Auth : Login Component')
   }
 }

@@ -25,15 +25,13 @@ if (process.defaultApp) {
 
 function createWindow() {
   const electronScreen = electron_1.screen;
-  const size = electronScreen.getPrimaryDisplay().workAreaSize;
+  // const size = electronScreen.getPrimaryDisplay().workAreaSize;
   // Create the browser window.
   win = new electron_1.BrowserWindow({
-    x: 0,
-    y: 0,
     minWidth: 550,
     minHeight: 768,
-    width: size.width,
-    height: size.height,
+    width: 1200,
+    height: 768,
     frame: false,
     icon: "/dist/ic_launcher_round.png",
     webPreferences: {
@@ -68,7 +66,6 @@ function createWindow() {
   else {
     app.on("second-instance", (event, argv, _workingDirectory) => {
       if (win) {
-        console.log("ARGV" + argv);
         const depelinkUrl = argv.find((arg) => {
           return arg.startsWith("enwrite://");
         });
@@ -78,7 +75,7 @@ function createWindow() {
         } else {
           console.log("No url recieved");
         }
-        if (!win.isMaximized()) win.restore();
+        if (win.isMaximized()) win.restore();
         win.focus();
       }
     });

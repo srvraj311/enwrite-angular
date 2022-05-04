@@ -7,21 +7,23 @@ import {UiService} from "../../services/ui.service";
   styleUrls: ['./titlebar.component.css']
 })
 export class TitlebarComponent implements OnInit {
-  navOpen!: boolean;
   isElectron:boolean = this.uiService.isElectron();
   constructor(private uiService : UiService) {
-    this.uiService.navStatus.subscribe(b => this.navOpen = b)
+    this.isElectron = this.uiService.isElectron();
   }
   ngOnInit(): void {
 
   }
   close(){
+    console.log("CLose Button Clicked");
     this.uiService.close();
   }
   minimise(){
+    console.log("Minimise Button Clicked");
     this.uiService.minimise();
   }
   maximise(){
+    console.log("Maximise Button Clicked");
     this.uiService.maximise();
   }
 }

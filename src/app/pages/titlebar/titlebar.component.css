@@ -9,9 +9,10 @@
   width: 100vw;
   min-height: 30px;
   background: transparent;
-  -webkit-user-select: none;
+  /* -webkit-user-select: all; */
   -webkit-app-region: drag;
-  z-index: 100;
+  /* user-select: all; */
+  z-index: 90;
 }
 .head{
   padding: 8px;
@@ -19,6 +20,7 @@
   border-radius: 50%;
   margin-right: 10px;
   margin-top: 8px;
+  -webkit-app-region: none;
 }
 .head:first-child{
   margin-right: 15px;
@@ -31,4 +33,14 @@
 }
 .min {
   background: linear-gradient(coral , orange);
+}
+
+.close:hover{
+  background: linear-gradient(#580327 , #551949);
+}
+.max:hover{
+  background: linear-gradient(rgb(0, 54, 0) , rgb(18, 75, 18));
+}
+.min:hover {
+  background: linear-gradient(rgb(153, 77, 49) , rgb(126, 82, 0));
 }

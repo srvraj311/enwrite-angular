@@ -26,7 +26,6 @@ export class UiService {
 
   isElectron(){
     if (this.electron.isElectron) {
-      console.log(process.env);
       console.log('Run in electron');
       return true;
     } else {

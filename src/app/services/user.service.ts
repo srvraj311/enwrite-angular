@@ -134,8 +134,9 @@ export class UserService {
       .signInWithPopup(provider)
       .then((result : any) => {
         if(isApp && window !== undefined){
-          window.location.href = 'enwrite://' + result._tokenResponse.oauthIdToken;
-          return 0;
+          if(result.credential.idToken)
+          window.location.href = 'enwrite://' + result.credential.idToken;
+          else console.log("Token Not Found");
         }
         this.SetUserData(result.user).then(r => {
           
@@ -148,17 +149,22 @@ export class UserService {
   }
 
   async redirectAuth():Promise<boolean>{
+   
     const res:any = await this.AuthLogin(new GoogleAuthProvider(), true)
     return res == 0;
   }
   
-  async signInGoogleWithPopUp(token : string){
-    const res:any = await this.AuthLogin(GoogleAuthProvider.credential(token), false);
-    if (res) {
+  signInGoogleWithPopUp(token : string){
+    this.authService.signInWithCredential(GoogleAuthProvider.credential(token)).then(
+    (res) => {
+      this.SetUserData(res.user).then(r => {
+      });
       this.ngZone.run(() => {
         this.router.navigate(['home']).then(r => console.log('Navigated to Home'));
       });
-    }
+    }).catch((error) => {
+      this.processError(error);
+    });
   }
   async googleAuth() {
     const res:any = await this.AuthLogin(new auth.GoogleAuthProvider(), false);
