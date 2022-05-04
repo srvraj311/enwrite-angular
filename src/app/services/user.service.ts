@@ -139,7 +139,7 @@ export class UserService {
           else console.log("Token Not Found");
         }
         this.SetUserData(result.user).then(r => {
-          
+
         });
         return result;
       })
@@ -149,11 +149,10 @@ export class UserService {
   }
 
   async redirectAuth():Promise<boolean>{
-   
     const res:any = await this.AuthLogin(new GoogleAuthProvider(), true)
     return res == 0;
   }
-  
+
   signInGoogleWithPopUp(token : string){
     this.authService.signInWithCredential(GoogleAuthProvider.credential(token)).then(
     (res) => {

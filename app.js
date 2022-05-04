@@ -23,7 +23,7 @@ if (process.defaultApp) {
   }
 }
 
-function createWindow() {
+function createWindow(title, content) {
   const electronScreen = electron_1.screen;
   // const size = electronScreen.getPrimaryDisplay().workAreaSize;
   // Create the browser window.
@@ -33,7 +33,7 @@ function createWindow() {
     width: 1200,
     height: 768,
     frame: false,
-    icon: "/dist/ic_launcher_round.png",
+    icon : 'dist/en-write-angular/assets/icons/ic_launcher_round.png',
     webPreferences: {
       devTools: true,
       webSecurity: false,
@@ -60,7 +60,6 @@ function createWindow() {
       .catch((e) => console.log(e));
   }
   // For protocol Windows
-
   const getTheLock = app.requestSingleInstanceLock();
   if (!getTheLock) app.quit();
   else {
@@ -82,7 +81,10 @@ function createWindow() {
   }
   // For Protocol hit UNIX
   app.on("open-url", (event, url) => {
-    dialog.showErrorBox(`Welcome Back' , 'You arrived from : ${url}`);
+    if(url){
+      const token = url.substring(10).slice(0, url.length);
+      win.webContents.send("auth-token", token);
+    }
   });
 
   // Emitted when the window is closed.
@@ -113,8 +115,16 @@ try {
     }
   });
 
-  ipcMain.on("close-window", () => {
-    win.close();
+  ipcMain.on("close-window", async () => {
+    const ret = await dialog.showMessageBox(win, {
+      title: 'Close Window',
+      buttons: ['Close', 'Cancel'],
+      type: 'question',
+      message: 'Close Window',
+      detail: `Do you want to close this window?`
+    }).catch(e => console.log(e))
+    if(ret.response === 0) win.close();
+
   });
   ipcMain.on("minimize-window", () => {
     win.minimize();
@@ -127,6 +137,17 @@ try {
       win.unmaximize();
     }
   });
+
+  ipcMain.on('wait-auth', async ()=>{
+    const res = await dialog.showMessageBox(win, {
+      title : 'Waiting for Browser Signin',
+      buttons : ['Close'],
+      type : 'info',
+      message : "Waiting",
+      detail : "Waiting for browser to complete signup process",
+      icon : 'dist/en-write-angular/assets/icons/ic_launcher_round.png'
+    }).catch(e => console.log(e))
+  })
 
   electron_1.app.on("activate", function () {
     // On OS X it's common to re-create a window in the app when the

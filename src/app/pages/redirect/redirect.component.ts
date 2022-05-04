@@ -11,7 +11,6 @@ export class RedirectComponent implements OnInit {
   constructor(private userService : UserService) { }
 
   ngOnInit(): void {
-    this.userService.redirectAuth();
+    this.userService.redirectAuth().then(r => console.log('Waiting for Auth'));
   }
-
 }

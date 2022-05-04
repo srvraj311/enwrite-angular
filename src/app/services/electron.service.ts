@@ -27,7 +27,7 @@ export class ElectronService {
       this.childProcess = window.require('child_process');
       this.fs = window.require('fs');
       this.browserWindow = window.require('electron').BrowserWindow
-      
+
       this.ipcRenderer.on('auth-token',  (event , token) => {
           this.userService.signInGoogleWithPopUp(token);
       })
@@ -69,5 +69,9 @@ export class ElectronService {
     if(this.isElectron) {
       this.ipcRenderer.send('maximize-window')
     }
+  }
+
+  showWaitingMessage() {
+    this.ipcRenderer.send('wait-auth')
   }
 }

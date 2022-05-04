@@ -95,11 +95,7 @@ export class LoginComponent implements OnInit {
 
   googleSignIn(){
     if(this.electron.isElectron){
-      this.userService.openDialog(
-          'Opening browser for Signing in',
-          'If not opened, go to https://enwrite-8ffba.web.app/redirect'
-      );
-      ElectronService.openUrlInBrowser('http://localhost:4200/redirect');
+      ElectronService.openUrlInBrowser('https://enwrite-8ffba.web.app/redirect');
       return
     }
       this.userService.googleAuth().then(r => 'Google Auth : Login Component');
