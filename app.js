@@ -72,7 +72,7 @@ function createWindow(title, content) {
           const token = deeplinkUrl.substring(10).slice(0, -1);
           win.webContents.send("auth-token", token);
         } else {
-          console.log("No url recieved");
+          console.log("No url received");
         }
         if (win.isMaximized()) win.restore();
         win.focus();
