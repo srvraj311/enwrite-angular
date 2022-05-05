@@ -6,11 +6,12 @@
     "appId": "com.srvraj311.enWrite",
     "productName": "enWrite",
     "target": "win",
+    "icon": "dist/en-write-angular/assets/icon.ico",
     "nsis": {
       "oneClick": "true",
       "runAfterFinish": true,
       "createDesktopShortcut": true,
-      "icon": "dist/en-write-angular/assets/icon.ico"
+      "installerIcon" : "dist/en-write-angular/assets/icon.ico"
     },
     "mac": {
       "category": "utility",
