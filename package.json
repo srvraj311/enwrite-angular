@@ -9,7 +9,8 @@
     "nsis": {
       "oneClick": "true",
       "runAfterFinish": true,
-      "createDesktopShortcut": true
+      "createDesktopShortcut": true,
+      "icon": "dist/en-write-angular/assets/icon.ico"
     },
     "mac": {
       "category": "utility",
