@@ -2,7 +2,7 @@
 
 [![N|Solid](https://res.cloudinary.com/srvraj311/image/upload/v1626325102/Main_2_hu5xxl.png)](https://srvraj311.github.io)
 
-[![View Live]()](https://enwrite-web.web.app/login)
+### [View Live](https://enwrite-web.web.app/login)
 enWrite is an simple and clean web app for taking notes on the go that syncs across your devices.
 
 - Note taking and Real-Time cloud sync
